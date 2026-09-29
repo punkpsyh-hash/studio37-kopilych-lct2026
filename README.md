@@ -5,6 +5,8 @@
 ## Материалы сдачи
 
 - [APK 0.5.5 для arm64](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.5-lct2026/kopilych-0.5.5-arm64-release-20260929-g.apk), SHA-256 `47251D4835D4BE041BE07C6FAF3F8BB8B072A86B2C4D0BDC8C67F0EAF1B8B83D`.
+
+Если в форме сдачи уже сохранена прямая ссылка на APK 0.5.4, она остаётся рабочей. Для проверки исправленного ввода вопроса помощнику используйте APK 0.5.5 по ссылке выше; исправление также описано в документации ниже.
 - [Инструкция установки и проверки](docs/submission-2026-09-29/INSTALL.md).
 - [Пояснительная записка PDF](docs/submission-2026-09-29/kopilych-manual-2026-09-29.pdf).
 - [Изменения и границы проверки APK 0.5.5](docs/submission-2026-09-29/RELEASE-0.5.5.md).
