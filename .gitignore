@@ -25,3 +25,4 @@ app/assets/**/*.ttf
 app/assets/**/*.wav
 app/assets/voice/tts/espeak-ng-data/
 app/test/failures/
+!app/assets/helper/model_int8.onnx

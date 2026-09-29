@@ -4,11 +4,11 @@
 
 | Материал | Текущий путь и статус | Действие перед отправкой |
 |---|---|---|
-| Исходный код | [GitHub](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026), конкурсный срез `v0.5.3-lct2026`; бинарные ресурсы восстанавливаются из APK по SHA-256 | Проверить публичный доступ извне и сопоставить тег с APK |
+| Исходный код | [GitHub](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026), конкурсный срез `v0.5.4-lct2026`; бинарные ресурсы восстанавливаются из APK по SHA-256 | Проверить публичный доступ извне и сопоставить тег с APK |
 | README с назначением, стеком, запуском и матрицей §7.1 | [README.md](README.md), подготовлен | Убедиться, что он попал в репозиторий |
 | Архитектура и данные | [ARCHITECTURE.md](ARCHITECTURE.md), подготовлен | Добавить в репозиторий |
 | Установка и проверка | [INSTALL.md](INSTALL.md), подготовлен | Добавить в репозиторий |
-| APK | [0.5.3 arm64 release d](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.3-lct2026/kopilych-0.5.3-arm64-release-20260929-e.apk), метаданные и подпись проверены | Дать доступ к файлу, затем проверить на физическом Android |
+| APK | [0.5.4 arm64 release d](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.4-lct2026/kopilych-0.5.4-arm64-release-20260929-f.apk), метаданные и подпись проверены | Дать доступ к файлу, затем проверить на физическом Android |
 | Три ключевых экрана | Есть исторические кадры в `outputs/android-acceptance-2026-09-28/`; для `-e` кадров нет | Снять выбор питомца, дом с 3D/HUD и бюджет на устройстве с `-e` |
 | Таблица требований и план | [README.md](README.md), [полный аудит](../requirements-audit-2026-09-29.md) | Сверить финальные статусы после Android-прогона |
 | Презентация §4 | [PDF](kopilych-presentation-2026-09-29.pdf) и [PPTX](kopilych-presentation-2026-09-29.pptx): 10 слайдов, актуализированы тесты, APK `-e` и Android-ограничение | Добавить к сдаче; по возможности заменить схему интерфейса реальным кадром `-e` |

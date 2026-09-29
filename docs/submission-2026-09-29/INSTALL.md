@@ -1,8 +1,8 @@
-# Установка и проверка · Копилыч 0.5.3
+# Установка и проверка · Копилыч 0.5.4
 
 ## Готовый APK
 
-Файл: [`outputs/kopilych-0.5.3-arm64-release-20260929-e.apk`](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.3-lct2026/kopilych-0.5.3-arm64-release-20260929-e.apk). Пакет `ru.studio37.kopilych`, версия `0.5.3` (`4010`), архитектура `arm64-v8a`, размер 257 319 282 байта, SHA-256 `68E37E18A0F657CB38459AFD541AAAE473BEBA0AA9C71316EBD048281598E45D`. Подпись v2 проверена `apksigner`. APK объявляет minSdk24; для конкурсной проверки используйте физический Android **8.0+** с ОЗУ **от 3 ГБ**. Запуск этого файла на физическом устройстве пока не подтверждён.
+Файл: [`outputs/kopilych-0.5.4-arm64-release-20260929-f.apk`](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.4-lct2026/kopilych-0.5.4-arm64-release-20260929-f.apk). Пакет `ru.studio37.kopilych`, версия `0.5.4` (`4011`), архитектура `arm64-v8a`, размер 261 348 683 байта, SHA-256 `1969D91D24BD99660808DF21AA804BE75152C776BEE836365B9C8BA32F229C75`. Подпись v2 проверена `apksigner`. APK объявляет minSdk24; для конкурсной проверки используйте физический Android **8.0+** с ОЗУ **от 3 ГБ**. Запуск этого файла на физическом устройстве пока не подтверждён.
 
 1. Скопируйте APK на телефон и откройте файл в системном установщике. При необходимости разрешите установку из выбранного файлового приложения.
 2. Запустите «Копилыч»; выберите питомца, окрас и имя. Для быстрой проверки пяти периодов откройте вход в раздел взрослого и маршрут «Быстрая проверка». [Пошаговый сценарий](../organizer-quick-check-2026-09-29.md).
@@ -15,7 +15,7 @@
 Сначала скачайте APK по ссылке выше. Из корня репозитория восстановите бинарные мобильные ресурсы, исключённые из Git (скрипт проверит SHA-256 и все пути из `pubspec.yaml`):
 
 ```powershell
-python tools/restore_assets_from_apk.py C:\path\to\kopilych-0.5.3-arm64-release-20260929-e.apk
+python tools/restore_assets_from_apk.py C:\path\to\kopilych-0.5.4-arm64-release-20260929-f.apk
 ```
 
 Затем из корня проекта:
@@ -31,7 +31,7 @@ flutter run
 Команда `flutter run` требует подключённое совместимое Android-устройство или эмулятор. Сборка release для arm64:
 
 ```powershell
-flutter build apk --release --split-per-abi --target-platform android-arm64 --build-name 0.5.3 --build-number 2010
+flutter build apk --release --split-per-abi --target-platform android-arm64 --build-name 0.5.4 --build-number 2011
 ```
 
 Подписанная release-сборка требует локальный `app/android/key.properties` и ключ владельца, которые не распространяются вместе с исходниками. Для независимой проверки кода можно собрать debug APK без этих секретов. Сборка из исходников без того же ключа не будет побайтово идентична переданному `-e`.

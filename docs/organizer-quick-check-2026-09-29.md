@@ -2,7 +2,7 @@
 
 ## Сборка и устройство
 
-- Текущий файл: [`outputs/kopilych-0.5.3-arm64-release-20260929-e.apk`](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.3-lct2026/kopilych-0.5.3-arm64-release-20260929-e.apk), 257 319 282 байта (245,48 МиБ), SHA-256 `68E37E18A0F657CB38459AFD541AAAE473BEBA0AA9C71316EBD048281598E45D`. Подпись APK v2 проверена; в файле только ABI `arm64-v8a`.
+- Текущий файл: [`outputs/kopilych-0.5.4-arm64-release-20260929-f.apk`](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.4-lct2026/kopilych-0.5.4-arm64-release-20260929-f.apk), 261 348 683 байта (245,48 МиБ), SHA-256 `1969D91D24BD99660808DF21AA804BE75152C776BEE836365B9C8BA32F229C75`. Подпись APK v2 проверена; в файле только ABI `arm64-v8a`.
 - Для обязательной проверки нужен физический Android-смартфон или планшет с **Android 8.0+** и **ОЗУ от 3 ГБ**; портретный экран — от 360 dp. Требования приведены в [полном ТЗ, §3.1](../references/official/lct-2026-city-6-technical-brief.pdf). Порог 8 ГБ ОЗУ в ТЗ отсутствует.
 - **Статус:** APK `-d` на физическом телефоне ещё не запускали. `flutter analyze` и 238/238 Flutter тестов прошли; браузерный стенд проверил сцены, но не подтверждает работу Android-приложения. Требуется проверить именно `-d` на устройстве и записать модель, Android, ОЗУ, версию APK, сценарии, результаты и ошибки.
 

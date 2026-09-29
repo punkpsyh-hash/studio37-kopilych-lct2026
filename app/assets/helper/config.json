@@ -1,0 +1,8 @@
+{
+ "max_len": 48,
+ "answer_threshold": 0.75,
+ "ask_threshold": 0.35,
+ "norm": "lowercase, ё→е, всё кроме букв/цифр/пробела/дефиса → пробел (как rag.norm), затем WordPiece по vocab.txt",
+ "pool": "mean по attention_mask",
+ "output": "softmax по labels.json"
+}

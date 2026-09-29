@@ -11,6 +11,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   model_viewer_plus: 1.9.3
+  onnxruntime:
+    path: vendor/onnxruntime_shared
   path_provider: 2.1.5
   record: 6.1.2
   sherpa_onnx: 1.13.8
@@ -29,6 +31,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/helper/model_int8.onnx
+    - assets/helper/vocab.txt
+    - assets/helper/labels.json
+    - assets/helper/config.json
+    - assets/helper/cards.json
+    - assets/helper/chat.json
     - assets/art/cover-hamster-meshy.png
     - assets/art/room-bathroom.png
     - assets/art/room-kitchen.png

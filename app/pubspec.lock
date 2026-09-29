@@ -308,6 +308,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.3"
+  onnxruntime:
+    dependency: "direct main"
+    description:
+      path: "vendor/onnxruntime_shared"
+      relative: true
+    source: path
+    version: "1.4.1"
   package_config:
     dependency: transitive
     description:

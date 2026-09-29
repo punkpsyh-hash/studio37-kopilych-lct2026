@@ -4,20 +4,20 @@
 
 ## Материалы сдачи
 
-- [APK 0.5.3 для arm64](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.3-lct2026/kopilych-0.5.3-arm64-release-20260929-e.apk), SHA-256 `68E37E18A0F657CB38459AFD541AAAE473BEBA0AA9C71316EBD048281598E45D`.
+- [APK 0.5.4 для arm64](https://github.com/punkpsyh-hash/studio37-kopilych-lct2026/releases/download/v0.5.4-lct2026/kopilych-0.5.4-arm64-release-20260929-f.apk), SHA-256 `1969D91D24BD99660808DF21AA804BE75152C776BEE836365B9C8BA32F229C75`.
 - [Инструкция установки и проверки](docs/submission-2026-09-29/INSTALL.md).
 - [Пояснительная записка PDF](docs/submission-2026-09-29/kopilych-manual-2026-09-29.pdf).
-- [Изменения и границы проверки APK 0.5.3](docs/submission-2026-09-29/RELEASE-0.5.3.md).
+- [Изменения и границы проверки APK 0.5.4](docs/submission-2026-09-29/RELEASE-0.5.4.md).
 - [Архитектура и правила](docs/submission-2026-09-29/ARCHITECTURE.md).
-- [Презентация команды PPTX](docs/submission-2026-09-29/studio37-lct2026-team-presentation.pptx) для поля сдачи. [Техническая презентация PPTX](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pptx) и [PDF](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pdf) описывают предыдущий APK 0.5.2; обновление 0.5.3 указано выше.
+- [Презентация команды PPTX](docs/submission-2026-09-29/studio37-lct2026-team-presentation.pptx) для поля сдачи. [Техническая презентация PPTX](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pptx) и [PDF](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pdf) описывают предыдущий APK 0.5.2; обновление 0.5.4 указано выше.
 - [Комплект сдачи и матрица требований](docs/submission-2026-09-29/README.md), [аудит ТЗ для предыдущей сборки](docs/requirements-audit-2026-09-29.md), [маршрут быстрой проверки](docs/organizer-quick-check-2026-09-29.md).
 
 ## Исходники и локальный запуск
 
-`app/` содержит Flutter/Dart приложение, Android-проект, код 3D-сцены и тесты. Тяжёлые бинарные ресурсы доступны внутри APK релиза; их исключили из Git ради своевременной сдачи. [Список вынесенных файлов](ASSET_MANIFEST.tsv). После загрузки APK восстановите ресурсы по проверенному SHA-256, затем запустите команды из `app/`:
+`app/` содержит Flutter/Dart приложение, Android-проект, код 3D-сцены, модель офлайн-помощника и тесты. Большие игровые бинарные ресурсы доступны внутри APK релиза; их исключили из Git ради своевременной сдачи. [Список вынесенных файлов](ASSET_MANIFEST.tsv). После загрузки APK восстановите ресурсы по проверенному SHA-256, затем запустите команды из `app/`:
 
 ```sh
-python tools/restore_assets_from_apk.py path/to/kopilych-0.5.3-arm64-release-20260929-e.apk
+python tools/restore_assets_from_apk.py path/to/kopilych-0.5.4-arm64-release-20260929-f.apk
 cd app
 flutter pub get
 flutter analyze
@@ -27,6 +27,6 @@ flutter build apk --debug --target-platform android-arm64
 
 Для релизной подписи нужен личный ключ владельца, который не входит в репозиторий. Переданный APK подписан и проверен; независимая сборка с другим ключом не будет побайтово идентичной. Скрипт восстановления не заменяет исходные мастер-модели, а извлекает именно мобильные ресурсы переданной сборки. Подробности — в [инструкции](docs/submission-2026-09-29/INSTALL.md).
 
-**Проверено:** `flutter analyze` без замечаний, 237/237 Flutter-тестов, целостность и подпись APK. **Не проверено:** установка и сквозной сценарий именно этого APK на физическом Android; браузерные кадры не заменяют такую проверку. Для конкурсной проверки нужен Android 8.0+ с ОЗУ от 3 ГБ.
+**Проверено:** `flutter analyze` без замечаний, 243 успешных Flutter-теста, 1 пропущен, целостность и подпись APK. **Не проверено:** установка и сквозной сценарий именно этого APK на физическом Android; браузерные кадры не заменяют такую проверку. Для конкурсной проверки нужен Android 8.0+ с ОЗУ от 3 ГБ.
 
 [Сведения о правах и сторонних компонентах](RIGHTS.md). Команда подтвердила право на публикацию использованных материалов для экспертной проверки; отдельный независимый аудит прав не проводился.

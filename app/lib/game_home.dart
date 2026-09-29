@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'cartoon_props.dart';
+import 'finance_helper_panel.dart';
 import 'game.dart';
 import 'room_scene.dart';
 import 'scene_bridge.dart';
@@ -1740,6 +1741,20 @@ class GameHome extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            Positioned(
+                              top: 112,
+                              left: 244,
+                              child: FinanceHelperPanel(
+                                maxCardWidth: math.max(
+                                  160,
+                                  safe.maxWidth - actionsWidth - 268,
+                                ),
+                                maxCardHeight: math.max(
+                                  150,
+                                  safe.maxHeight - 130,
+                                ),
+                              ),
+                            ),
                           ],
                         );
                       }
@@ -1785,6 +1800,20 @@ class GameHome extends StatelessWidget {
                             child: const IgnorePointer(
                               child: SizedBox(
                                 key: ValueKey('scene-open-center'),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 90,
+                            left: panelWidth + 24,
+                            child: FinanceHelperPanel(
+                              maxCardWidth: math.max(
+                                130,
+                                safe.maxWidth - 2 * (panelWidth + 24),
+                              ),
+                              maxCardHeight: math.max(
+                                120,
+                                safe.maxHeight - 105,
                               ),
                             ),
                           ),
@@ -1848,6 +1877,14 @@ class GameHome extends StatelessWidget {
                             child: SizedBox(key: ValueKey('scene-open-center')),
                           ),
                         ),
+                        Positioned(
+                          top: safe.maxHeight * .42,
+                          right: 12,
+                          child: FinanceHelperPanel(
+                            maxCardWidth: math.min(280, safe.maxWidth - 24),
+                            maxCardHeight: math.max(150, safe.maxHeight * .30),
+                          ),
+                        ),
                       ],
                     ),
                   )
@@ -1887,6 +1924,22 @@ class GameHome extends StatelessWidget {
                             : dish.active
                             ? _dishControls()
                             : _compactControls(room, showRooms: false),
+                      ),
+                      Positioned(
+                        top: _taskActive
+                            ? 112
+                            : math.min(310, constraints.maxHeight * .44),
+                        right: 12,
+                        child: FinanceHelperPanel(
+                          maxCardWidth: math.min(
+                            280,
+                            constraints.maxWidth - 24,
+                          ),
+                          maxCardHeight: math.max(
+                            170,
+                            constraints.maxHeight * .30,
+                          ),
+                        ),
                       ),
                     ],
                   ),

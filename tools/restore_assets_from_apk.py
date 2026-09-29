@@ -1,7 +1,7 @@
 """Restore Flutter assets from the exact contest APK before a local build.
 
 Usage: python tools/restore_assets_from_apk.py <downloaded-apk>
-The APK is published as an asset of release v0.5.3-lct2026.
+The APK is published as an asset of release v0.5.4-lct2026.
 """
 
 from hashlib import sha256
@@ -9,7 +9,7 @@ from pathlib import Path, PurePosixPath
 from sys import argv, exit
 from zipfile import ZipFile
 
-EXPECTED = "68E37E18A0F657CB38459AFD541AAAE473BEBA0AA9C71316EBD048281598E45D"
+EXPECTED = "1969D91D24BD99660808DF21AA804BE75152C776BEE836365B9C8BA32F229C75"
 PREFIX = "assets/flutter_assets/assets/"
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "app/assets"
