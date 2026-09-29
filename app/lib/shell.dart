@@ -717,7 +717,21 @@ class _GameShellState extends State<GameShell> with WidgetsBindingObserver {
           };
     final confirmed = await showDialog<bool>(
       context: context,
+      barrierColor: Colors.transparent,
       builder: (context) => AlertDialog(
+        key: const ValueKey('care-confirmation'),
+        alignment: Alignment.topRight,
+        scrollable: true,
+        insetPadding: EdgeInsets.fromLTRB(
+          12,
+          MediaQuery.paddingOf(context).top + 12,
+          12,
+          12,
+        ),
+        constraints: BoxConstraints(
+          maxWidth: 290,
+          maxHeight: MediaQuery.sizeOf(context).height * .58,
+        ),
         title: Text('$description?'),
         content: Text(
           '${index == 1 ? 'Бесплатная игра.' : 'Обязательная забота.'} $effect\n\n'

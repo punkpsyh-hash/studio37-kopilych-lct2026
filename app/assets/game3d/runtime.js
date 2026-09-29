@@ -404,6 +404,7 @@ const HOME_CAMERAS = {
   kitchen: { position: [0.0, 1.95, 3.7], target: [0.0, 0.35, -0.6], fovDegrees: 58 },
   bathroom: { position: [0.2, 1.95, 3.7], target: [0.2, 0.35, -0.6], fovDegrees: 58 },
 };
+const HAMSTER_LIVING_CAMERA = { position: [0.0, 1.5, 3.2], target: [0.0, -0.3, -0.6], fovDegrees: 55 };
 
 async function loadDescriptor() {
   const response = await fetch(descriptorUrl, { cache: 'no-store', credentials: 'same-origin' });
@@ -960,7 +961,7 @@ function configureCamera(room) {
   // Use the authored interior camera that is checked with the room assets.
   // HUD insets never zoom the room out.
   const spec = state.mode === 'home'
-    ? room.camera
+    ? (state.species === 'hamster' && room.id === 'living' ? HAMSTER_LIVING_CAMERA : room.camera)
     : room.adoption?.camera || inferredAdoptionCamera(room) || room.camera;
   camera.position.copy(vec3(spec.position, [0, 2.4, 5.5]));
   camera.fov = responsiveVerticalFov(Number.isFinite(spec.fovDegrees) ? spec.fovDegrees : 38);
@@ -3914,7 +3915,7 @@ async function applyVisualState(changed = [], previousState = null) {
     else if (state.stage > 1) reportStageUnavailable(state);
   }
   await Promise.allSettled(tasks);
-  if ((changed.includes('mode') || (state.mode === 'adoption' && changed.includes('species'))) && roomRoot) {
+  if ((changed.includes('mode') || changed.includes('species')) && roomRoot) {
     configureCamera(roomDefinition(nextRoom));
   }
   if (changed.includes('mode') || changed.includes('adoptionOpen') || changed.includes('species') || changed.includes('color')) {

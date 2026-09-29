@@ -24,6 +24,7 @@ abstract interface class VoiceSession implements Listenable {
 /// Models ship in the APK. No network service, background listening or saved
 /// transcript history. One bounded utterance is kept only until recognition.
 class LocalVoice extends ChangeNotifier implements VoiceSession {
+  static const _offlineTts = MethodChannel('ru.studio37.kopilych/offline_tts');
   static Future<void>? _startupCleanup;
   static Future<Map<String, dynamic>>? _recordedCatalog;
   final _recorder = AudioRecorder();
@@ -148,13 +149,18 @@ class LocalVoice extends ChangeNotifier implements VoiceSession {
           return;
         }
       }
-      final root = await prepare();
+      // The bundled sherpa native TTS currently requests an ONNX Runtime API
+      // newer than the packaged runtime. On Android use only a locally
+      // installed Russian system voice; never silently fall back to network.
+      final root = Platform.isAndroid ? null : await prepare();
       await _waitForNative();
       if (_closed || epoch != _epoch) return;
       output =
           '${(await getTemporaryDirectory()).path}/pet-speech-$_session-$epoch.wav';
       _outputPath = output;
-      final job = synthesizeSpeech(root, text, output);
+      final Future<List<double>> job = Platform.isAndroid
+          ? _synthesizeOffline(text, output)
+          : synthesizeSpeech(root!, text, output);
       _nativeWork = job;
       final envelope = await job;
       if (_closed || epoch != _epoch) {
@@ -180,6 +186,21 @@ class LocalVoice extends ChangeNotifier implements VoiceSession {
         _notify();
       }
     }
+  }
+
+  static Future<List<double>> _synthesizeOffline(
+    String text,
+    String output,
+  ) async {
+    await _offlineTts.invokeMethod<void>('synthesize', {
+      'text': text,
+      'path': output,
+    });
+    if (!await File(output).exists() || await File(output).length() == 0) {
+      throw StateError('Голосовой движок не создал аудио.');
+    }
+    // The system engine does not expose sample amplitudes over this channel.
+    return List<double>.filled((text.length * 4).clamp(12, 240), .35);
   }
 
   @override
@@ -255,6 +276,13 @@ class LocalVoice extends ChangeNotifier implements VoiceSession {
   Future<void> stop() async {
     _epoch++;
     _limit?.cancel();
+    if (Platform.isAndroid) {
+      try {
+        await _offlineTts.invokeMethod<void>('stop');
+      } catch (_) {
+        // No active system utterance or engine; keep navigation available.
+      }
+    }
     final wasSpeaking = speaking;
     if (listening) {
       try {

@@ -140,7 +140,7 @@ class GameHudGeometry {
             ? taskBottom
             : accessible
             ? .40
-            : .19,
+            : .09,
         left: 0,
       );
     }
@@ -1310,7 +1310,7 @@ class GameHome extends StatelessWidget {
     ),
   );
 
-  Widget _compactControls(HomeRoom room) {
+  Widget _compactControls(HomeRoom room, {bool showRooms = true}) {
     final enabled = ready && !busy;
     final jobDock = onJob != null || room == HomeRoom.kitchen;
     final incomeAvailable = jobDock
@@ -1326,8 +1326,10 @@ class GameHome extends StatelessWidget {
         : !jobDock && lessonWithoutReward
         ? 'Без награды'
         : 'Тренировка · без монет';
-    final jobLabel = onJob != null
-        ? jobTitle
+    final jobLabel = room == HomeRoom.kitchen
+        ? 'Посуда'
+        : onJob != null
+        ? 'Дела'
         : jobDock
         ? 'Посуда'
         : 'Задание';
@@ -1341,7 +1343,7 @@ class GameHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 150,
+              width: showRooms ? 150 : 122,
               child: _pill(
                 TextButton.icon(
                   key: const ValueKey('scene-care'),
@@ -1374,7 +1376,8 @@ class GameHome extends StatelessWidget {
               child: Semantics(
                 button: true,
                 enabled: enabled,
-                label: '$jobLabel. $rewardSemantics',
+                label:
+                    '${room == HomeRoom.kitchen ? 'Посуда и другие дела' : jobLabel}. $rewardSemantics',
                 excludeSemantics: true,
                 child: _pill(
                   TextButton.icon(
@@ -1408,32 +1411,83 @@ class GameHome extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
-        _pill(
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (final destination in HomeRoom.values)
-                _dockButton(
-                  key: ValueKey('scene-room-${destination.assetName}'),
-                  label: destination.label,
-                  icon: switch (destination) {
-                    HomeRoom.living => CartoonProp.sofa,
-                    HomeRoom.kitchen => CartoonProp.bowl,
-                    HomeRoom.bathroom => CartoonProp.bath,
-                  },
-                  selected: room == destination,
-                  action: enabled && destination != room
-                      ? () => onRoom(destination)
-                      : null,
-                ),
-            ],
+        if (showRooms) ...[
+          const SizedBox(height: 8),
+          _pill(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final destination in HomeRoom.values)
+                  _dockButton(
+                    key: ValueKey('scene-room-${destination.assetName}'),
+                    label: destination.label,
+                    icon: switch (destination) {
+                      HomeRoom.living => CartoonProp.sofa,
+                      HomeRoom.kitchen => CartoonProp.bowl,
+                      HomeRoom.bathroom => CartoonProp.bath,
+                    },
+                    selected: room == destination,
+                    action: enabled && destination != room
+                        ? () => onRoom(destination)
+                        : null,
+                  ),
+              ],
+            ),
+            padding: EdgeInsets.zero,
           ),
-          padding: EdgeInsets.zero,
-        ),
+        ],
       ],
     );
   }
+
+  Widget _portraitRoomStrip(HomeRoom room) => Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      for (final destination in HomeRoom.values)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 5),
+          child: Semantics(
+            button: true,
+            selected: room == destination,
+            label: 'Комната ${destination.label}',
+            enabled: ready && !busy && room != destination,
+            child: InkWell(
+              key: ValueKey('scene-room-${destination.assetName}'),
+              onTap: ready && !busy && room != destination
+                  ? () => onRoom(destination)
+                  : null,
+              borderRadius: BorderRadius.circular(18),
+              child: _pill(
+                SizedBox(
+                  width: 54,
+                  height: 49,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PropArt(switch (destination) {
+                        HomeRoom.living => CartoonProp.sofa,
+                        HomeRoom.kitchen => CartoonProp.bowl,
+                        HomeRoom.bathroom => CartoonProp.bath,
+                      }, size: 25),
+                      Text(
+                        destination.label,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 8,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                padding: EdgeInsets.zero,
+                accent: room == destination,
+              ),
+            ),
+          ),
+        ),
+    ],
+  );
 
   Widget _nextStep({bool accessible = false}) {
     if (_taskActive) return const SizedBox.shrink();
@@ -1818,6 +1872,12 @@ class GameHome extends StatelessWidget {
                             children: [_nextStep(), _feedback()],
                           ),
                         ),
+                      if (!_taskActive)
+                        Positioned(
+                          top: 132,
+                          right: 12,
+                          child: _portraitRoomStrip(room),
+                        ),
                       Positioned(
                         left: 12,
                         right: 12,
@@ -1826,7 +1886,7 @@ class GameHome extends StatelessWidget {
                             ? _jobControls(context)
                             : dish.active
                             ? _dishControls()
-                            : _compactControls(room),
+                            : _compactControls(room, showRooms: false),
                       ),
                     ],
                   ),

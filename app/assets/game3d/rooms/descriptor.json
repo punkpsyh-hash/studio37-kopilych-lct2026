@@ -78,9 +78,9 @@
       "contactPhase": 0.22,
       "effector": "front_right_paw",
       "target": [
-        -1.05,
+        0.8,
         0,
-        -1.82
+        -1.78
       ],
       "targetHeightMeters": 0.46,
       "entryArcMeters": 0.65,
@@ -1791,16 +1791,16 @@
           "targetNode": "TARGET__bathroom__clean_water",
           "camera": {
             "position": [
-              0.2,
-              1.45,
-              1.5
+              0.4,
+              1.35,
+              1.25
             ],
             "target": [
-              1.14,
-              0.4,
-              -1.3
+              0.95,
+              0.65,
+              -1.85
             ],
-            "fovDegrees": 62,
+            "fovDegrees": 54,
             "near": 0.05,
             "far": 30
           }

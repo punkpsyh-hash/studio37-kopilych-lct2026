@@ -231,8 +231,16 @@ void main() {
         }
 
         void expectPreview({required bool free}) {
-          final dialog = find.byType(AlertDialog);
+          final dialog = find.byKey(const ValueKey('care-confirmation'));
           expect(dialog, findsOneWidget);
+          expect(
+            tester.widget<AlertDialog>(dialog).alignment,
+            Alignment.topRight,
+          );
+          expect(
+            tester.getRect(find.text(care.title)).top,
+            lessThan(MediaQuery.sizeOf(tester.element(dialog)).height * .20),
+          );
           expect(
             find.descendant(of: dialog, matching: find.text(care.title)),
             findsOneWidget,

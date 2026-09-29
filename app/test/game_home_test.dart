@@ -584,6 +584,48 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('portrait home leaves the pet visible between corner actions', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(432, 768);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final state = GameState()..currentRoom = 'kitchen';
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: appTheme(),
+        home: Scaffold(
+          body: GameHome(
+            state: state,
+            scene: const ColoredBox(color: Colors.white),
+            ready: true,
+            busy: false,
+            onRoom: (_) {},
+            onCare: () {},
+            onLamp: () {},
+            onPlan: () {},
+            onMission: () {},
+            onDream: () {},
+            onNextDay: () {},
+            onJob: () {},
+          ),
+        ),
+      ),
+    );
+    final care = tester.getRect(find.byKey(const ValueKey('scene-care')));
+    final job = tester.getRect(find.byKey(const ValueKey('scene-job')));
+    final kitchen = tester.getRect(
+      find.byKey(const ValueKey('scene-room-kitchen')),
+    );
+    expect(care.right, lessThan(170));
+    expect(job.left, greaterThan(290));
+    expect(kitchen.left, greaterThan(340));
+    expect(kitchen.bottom, lessThan(care.top));
+    expect(find.text('Посуда'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   test('HUD viewport insets match portrait and notched landscape panels', () {
     final portrait = GameHudGeometry.resolve(
       const Size(432, 768),
@@ -592,7 +634,7 @@ void main() {
     );
     expect(
       (portrait.top, portrait.right, portrait.bottom, portrait.left),
-      (.13, 0, .19, 0),
+      (.13, 0, .09, 0),
     );
     final portraitLarge = GameHudGeometry.resolve(
       const Size(432, 768),
