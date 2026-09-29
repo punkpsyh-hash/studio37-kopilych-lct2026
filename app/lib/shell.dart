@@ -24,6 +24,7 @@ import 'shared_room.dart';
 import 'scene_preview_page.dart';
 import 'period_review.dart';
 import 'finance_intro.dart';
+import 'finance_helper_panel.dart';
 import 'canon_lesson.dart';
 import 'canon_lesson_page.dart';
 import 'catalog_page.dart';
@@ -1286,6 +1287,18 @@ class _GameShellState extends State<GameShell> with WidgetsBindingObserver {
             const Text(
               'Наш дом',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+            ),
+            ListTile(
+              leading: const CozyIcon(Icons.question_answer_rounded),
+              title: const Text('Спросить про деньги'),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const FinanceHelperPage(),
+                  ),
+                );
+              },
             ),
             for (final entry in [
               (1, 'Бюджет', Icons.account_balance_wallet_rounded),

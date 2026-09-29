@@ -6,6 +6,31 @@ import 'finance_helper.dart';
 import 'finance_helper_model.dart';
 import 'finance_helper_model_policy.dart';
 
+/// Keeps the question form mounted when the keyboard changes the game HUD.
+class FinanceHelperPage extends StatelessWidget {
+  const FinanceHelperPage({super.key, this.loadModel = FinanceHelperModel.load});
+
+  final Future<FinanceHelperModel> Function() loadModel;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Помощник по деньгам')),
+    body: SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(12),
+        child: Center(
+          child: FinanceHelperPanel(
+            initiallyOpen: true,
+            loadModel: loadModel,
+            maxCardWidth: 430,
+            maxCardHeight: 520,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 /// Compact floating help UI. Place in a Stack above the full-screen room.
 class FinanceHelperPanel extends StatefulWidget {
   const FinanceHelperPanel({
@@ -13,11 +38,13 @@ class FinanceHelperPanel extends StatefulWidget {
     this.loadModel = FinanceHelperModel.load,
     this.maxCardWidth = 350,
     this.maxCardHeight = 430,
+    this.initiallyOpen = false,
   });
 
   final Future<FinanceHelperModel> Function() loadModel;
   final double maxCardWidth;
   final double maxCardHeight;
+  final bool initiallyOpen;
 
   @override
   State<FinanceHelperPanel> createState() => _FinanceHelperPanelState();
@@ -27,9 +54,20 @@ class _FinanceHelperPanelState extends State<FinanceHelperPanel> {
   final _input = TextEditingController();
   FinanceHelperModel? _model;
   FinanceModelAnswer? _answer;
-  bool _open = false;
   bool _busy = false;
   int _epoch = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initiallyOpen) _loadModel();
+  }
+
+  void _loadModel() {
+    widget.loadModel().then((model) {
+      if (mounted) setState(() => _model = model);
+    }).catchError((Object _) {});
+  }
 
   @override
   void dispose() {
@@ -38,22 +76,12 @@ class _FinanceHelperPanelState extends State<FinanceHelperPanel> {
     super.dispose();
   }
 
-  void _toggle() {
-    setState(() {
-      _open = !_open;
-      if (!_open) {
-        _epoch++;
-        _input.clear();
-        _answer = null;
-        _busy = false;
-      }
-    });
-    if (_open && _model == null) {
-      // Loading is lazy; the rule-based helper remains available on failure.
-      widget.loadModel().then((model) {
-        if (mounted) setState(() => _model = model);
-      }).catchError((Object _) {});
-    }
+  void _openPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => FinanceHelperPage(loadModel: widget.loadModel),
+      ),
+    );
   }
 
   Future<void> _ask() async {
@@ -74,14 +102,14 @@ class _FinanceHelperPanelState extends State<FinanceHelperPanel> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    if (!_open) {
+    if (!widget.initiallyOpen) {
       return Semantics(
         button: true,
         label: 'Спросить про деньги',
         child: FloatingActionButton.small(
           heroTag: 'finance-helper',
           tooltip: 'Спросить про деньги',
-          onPressed: _toggle,
+          onPressed: _openPage,
           child: const Text('?', style: TextStyle(fontSize: 25)),
         ),
       );
@@ -106,7 +134,7 @@ class _FinanceHelperPanelState extends State<FinanceHelperPanel> {
                   const Expanded(child: Text('Спросить про деньги')),
                   IconButton(
                     tooltip: 'Закрыть помощника',
-                    onPressed: _toggle,
+                    onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(Icons.close),
                   ),
                 ],
