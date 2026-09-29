@@ -1,0 +1,593 @@
+{
+  "version": "1.3",
+  "date": "2026-09-25",
+  "status": "implementation_contract_not_release_acceptance",
+  "decision_log": [
+    {
+      "date": "2026-09-25",
+      "version": "1.0",
+      "decision": "Unified story, economy, pets, rooms, catalog, goals, periods, financial situations, and full-screen world with HUD over it."
+    },
+    {
+      "date": "2026-09-25",
+      "version": "1.1",
+      "decision": "Owner approved six presentation and acceptance clarifications: first minute, reward copy, Show guidance, resume/zero balance, preview-owned-equipped states, and explainable growth/finale.",
+      "scope": "required_for_implementation_not_implemented",
+      "unchanged": [
+        "opening_allowance_100_once",
+        "shared_period_income_limit_30",
+        "store_prices",
+        "three_pets",
+        "three_rooms",
+        "full_screen_world_with_hud_over"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "version": "1.2",
+      "decision": "Owner orders assets and species animation before scene assembly and Android builds; add optional J06 floor sweeping with the existing shared period income cap.",
+      "scope": "required_for_production_not_implemented",
+      "unchanged": [
+        "opening_allowance_100_once",
+        "shared_period_income_limit_30",
+        "store_prices",
+        "three_pets",
+        "three_rooms",
+        "full_screen_world_with_hud_over"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "version": "1.3",
+      "decision": "Owner requires isolated image reference and team quality review before generated visual 3D models; explicitly authorized Tripo generation without per-reference owner approval. Meshy or a similar generator also fits the source rule. No assistant-authored Blender/procedural visual models.",
+      "scope": "production_method_active; generated geometry and animation still require separate acceptance"
+    },
+    {
+      "date": "2026-09-27",
+      "version": "1.3",
+      "decision": "Owner explicitly requests landscape rotation: expand the full-screen room horizontally and rearrange floating HUD while preserving an active minigame and its progress.",
+      "scope": "visual_orientation_clarification; asset-first and physical Android acceptance remain required"
+    },
+    {
+      "date": "2026-09-29",
+      "version": "1.4",
+      "decision": "Owner asks to complete the new feedback: need meters decay over eight real hours, a once-per-calendar-day login bonus, small job performance bonuses, and removal of standalone drinking and room-light toggles. The existing 30-coin base learning/job reward remains a separate per-game-period cap; a completed job can add 5 for finishing within 45 seconds and 5 when all needs were above 70 at its start. Existing saves start the real-time clock on first resume without retroactive decay or reward.",
+      "scope": "economy_and_save_migration; requires tests and physical Android acceptance"
+    }
+  ],
+  "title": "Копилыч",
+  "campaign": "Новоселье своими руками",
+  "audience": [
+    7,
+    11
+  ],
+  "visual": {
+    "world_fills_viewport": true,
+    "hud_over_world": true,
+    "fit_entire_room": false,
+    "pet_foreground": true,
+    "portrait_min_dp": 360,
+    "orientations": ["portrait", "landscape"],
+    "landscape_expands_horizontal_view": true,
+    "rotation_preserves_minigame": true,
+    "touch_target_dp": 48,
+    "physical_android_test_required": true
+  },
+  "economy": {
+    "currency": "virtual_coins",
+    "opening_allowance": 100,
+    "opening_allowance_once": true,
+    "period_earn_limit": 30,
+    "daily_login_bonus": 10,
+    "daily_login_once_per_calendar_date": true,
+    "job_bonus_quick_seconds": 45,
+    "job_bonus_quick_coins": 5,
+    "job_bonus_happy_threshold_exclusive": 70,
+    "job_bonus_happy_coins": 5,
+    "income_sources_share_limit": [
+      "lesson",
+      "household_job"
+    ],
+    "replay_reward": 0,
+    "real_money": false,
+    "calendar_wait": false,
+    "wallets": [
+      "current",
+      "dream",
+      "reserve"
+    ],
+    "plan_categories": [
+      "required",
+      "wants",
+      "saving"
+    ],
+    "free_actions": [
+      "pet",
+      "owned_toy_play",
+      "room_transition",
+      "dialogue",
+      "help",
+      "practice"
+    ],
+    "income_giver": "scripted_parents",
+    "parent_confirmation_required": false
+  },
+  "pets": [
+    {
+      "id": "kitten",
+      "name": "Котёнок",
+      "default_name": "Персик",
+      "coats": [
+        "рыжий",
+        "серебристый полосатый",
+        "кремовый"
+      ],
+      "care": "water_wash"
+    },
+    {
+      "id": "puppy",
+      "name": "Щенок",
+      "default_name": "Бублик",
+      "coats": [
+        "медовый",
+        "чёрно-белый",
+        "шоколадный"
+      ],
+      "care": "water_wash"
+    },
+    {
+      "id": "hamster",
+      "name": "Хомячок",
+      "default_name": "Плюш",
+      "coats": [
+        "золотистый",
+        "кремовый",
+        "серо-белый"
+      ],
+      "care": "sand_groom"
+    }
+  ],
+  "store": [
+    {
+      "id": "food_refill",
+      "price": 10,
+      "category": "required",
+      "permanent": false,
+      "effect": "feed"
+    },
+    {
+      "id": "clean_care",
+      "price": 5,
+      "category": "required",
+      "permanent": false,
+      "effect": "species_care"
+    },
+    {
+      "id": "ball",
+      "price": 15,
+      "category": "wants",
+      "permanent": true,
+      "effect": "free_owned_toy_play"
+    },
+    {
+      "id": "stickers",
+      "price": 10,
+      "category": "wants",
+      "permanent": true,
+      "effect": "album_decoration"
+    },
+    {
+      "id": "bow",
+      "price": 18,
+      "category": "wants",
+      "permanent": true,
+      "effect": "head_socket_wearable"
+    },
+    {
+      "id": "cap",
+      "price": 20,
+      "category": "wants",
+      "permanent": true,
+      "effect": "head_socket_wearable"
+    },
+    {
+      "id": "nightlight",
+      "price": 30,
+      "category": "wants",
+      "permanent": true,
+      "effect": "small_toggle_light"
+    },
+    {
+      "id": "cozy_bed",
+      "price": 35,
+      "category": "wants",
+      "permanent": true,
+      "effect": "rest_animation"
+    }
+  ],
+  "goals": [
+    {
+      "id": "garden",
+      "price": 100,
+      "room": "kitchen",
+      "effect": "window_garden"
+    },
+    {
+      "id": "house",
+      "price": 120,
+      "room": "living",
+      "effect": "enter_and_rest"
+    },
+    {
+      "id": "stars",
+      "price": 150,
+      "room": "living",
+      "effect": "star_light"
+    }
+  ],
+  "growth": {
+    "stages": 3,
+    "qualifying_periods": [
+      0,
+      3,
+      5
+    ],
+    "conditions": [
+      "care_completed",
+      "plan_fact_reviewed",
+      "plan_delta_explained_if_present",
+      "net_saving_positive"
+    ],
+    "monotonic": true,
+    "cosmetics_affect_growth": false
+  },
+  "jobs": [
+    {
+      "id": "J01",
+      "room": "kitchen",
+      "title": "Чистая посуда",
+      "family": "clean",
+      "steps": [
+        "scrub_6",
+        "rinse",
+        "water_off"
+      ]
+    },
+    {
+      "id": "J02",
+      "room": "living",
+      "title": "Всё на месте",
+      "family": "sort",
+      "steps": [
+        "sort_3_toys_and_books"
+      ]
+    },
+    {
+      "id": "J03",
+      "room": "bathroom",
+      "title": "Полотенца по местам",
+      "family": "sort",
+      "steps": [
+        "fold_2",
+        "shelf_2"
+      ]
+    },
+    {
+      "id": "J04",
+      "room": "kitchen",
+      "title": "Разбираем упаковки",
+      "family": "sort",
+      "steps": [
+        "sort_4_by_symbols"
+      ]
+    },
+    {
+      "id": "J05",
+      "room": "living",
+      "title": "Полки к новоселью",
+      "family": "clean",
+      "steps": [
+        "wipe_3",
+        "put_cloth_away"
+      ]
+    },
+    {
+      "id": "J06",
+      "room": "living",
+      "title": "Подметём вместе",
+      "family": "clean",
+      "steps": [
+        "sweep_3_dust_zones_into_dustpan",
+        "empty_dustpan",
+        "put_tools_away"
+      ]
+    }
+  ],
+  "required_lessons": [
+    {
+      "id": "B02",
+      "topic": "budget",
+      "title": "Три направления плана"
+    },
+    {
+      "id": "B04",
+      "topic": "budget",
+      "title": "План можно объяснённо изменить"
+    },
+    {
+      "id": "S01",
+      "topic": "saving",
+      "title": "Выбираем мечту"
+    },
+    {
+      "id": "S02",
+      "topic": "saving",
+      "title": "Мечта и запас"
+    },
+    {
+      "id": "P01",
+      "topic": "purchases",
+      "title": "Собираем необходимое"
+    },
+    {
+      "id": "P06",
+      "topic": "purchases",
+      "title": "Хочу, но пока не хватает"
+    }
+  ],
+  "demo": {
+    "goal": "house",
+    "periods": [
+      {
+        "id": 1,
+        "earn_source": "lesson:P01",
+        "required": 15,
+        "wants": [
+          "ball"
+        ],
+        "to_dream": 25,
+        "to_reserve": 5,
+        "purchase_goal": false,
+        "active_steps": [
+          "select_goal",
+          "baseline",
+          "lesson:P01",
+          "income_receipt",
+          "revision",
+          "care",
+          "buy_or_defer_ball",
+          "lesson:S02",
+          "fact_review"
+        ]
+      },
+      {
+        "id": 2,
+        "earn_source": "job:J02",
+        "required": 15,
+        "wants": [],
+        "to_dream": 25,
+        "to_reserve": 0,
+        "purchase_goal": false,
+        "active_steps": [
+          "baseline",
+          "job:J02",
+          "income_receipt",
+          "revision",
+          "care",
+          "free_play",
+          "saving",
+          "fact_review"
+        ]
+      },
+      {
+        "id": 3,
+        "earn_source": "job:J03",
+        "required": 15,
+        "wants": [],
+        "to_dream": 25,
+        "to_reserve": 0,
+        "purchase_goal": false,
+        "active_steps": [
+          "baseline",
+          "job:J03",
+          "income_receipt",
+          "lesson:B04",
+          "revision",
+          "care",
+          "saving",
+          "fact_review",
+          "growth_feedback"
+        ],
+        "baseline": [
+          15,
+          10,
+          15
+        ],
+        "revision_reason": "defer_stickers_and_save_10"
+      },
+      {
+        "id": 4,
+        "earn_source": "job:J04",
+        "required": 15,
+        "wants": [],
+        "to_dream": 25,
+        "to_reserve": 0,
+        "purchase_goal": false,
+        "active_steps": [
+          "baseline",
+          "job:J04",
+          "income_receipt",
+          "revision",
+          "lesson:S01",
+          "care",
+          "saving",
+          "fact_review"
+        ]
+      },
+      {
+        "id": 5,
+        "earn_source": "job:J05",
+        "required": 15,
+        "wants": [],
+        "to_dream": 25,
+        "to_reserve": 0,
+        "attempt_unaffordable": "cozy_bed",
+        "purchase_goal": true,
+        "active_steps": [
+          "baseline",
+          "job:J05",
+          "income_receipt",
+          "revision",
+          "care",
+          "saving",
+          "lesson:P06",
+          "goal_purchase_or_progress",
+          "fact_review",
+          "finale"
+        ]
+      }
+    ],
+    "expected_final_wallet": [
+      30,
+      5,
+      5
+    ],
+    "expected_total_income": 150,
+    "expected_required_spend": 75,
+    "expected_wants_spend": 15,
+    "expected_goal_spend": 120
+  },
+  "release_required": {
+    "signed_release_apk": true,
+    "physical_device_min_ram_gb": 3,
+    "launch_seconds_max": 5,
+    "feedback_seconds_max": 1,
+    "offline": true,
+    "minimum_screenshots": 3,
+    "target_fps": 30
+  },
+  "guidance": {
+    "visible_active_steps": 1,
+    "completed_step_advances_to_next": true,
+    "menu_does_not_create_extra_active_quests": true,
+    "free_exploration_preserves_active_step": true,
+    "baseline_lesson": "B02",
+    "alternate_order_checks_completed_conditions": true
+  },
+  "polish_v1_1": {
+    "status": "required_for_implementation_not_implemented",
+    "first_minute": {
+      "pet_appearance_before_finance_guidance": true,
+      "free_pet_interaction_before_goal_and_plan": true,
+      "plan_required_before_earn_or_spend": true,
+      "one_guidance_prompt_at_a_time": true
+    },
+    "reward_copy": {
+      "before_entry": [
+        "Награда: 30 монет",
+        "Тренировка · без монет"
+      ],
+      "update_all_entries_after_period_income": true,
+      "income_explains_source_and_new_balance": true,
+      "transfer_explains_both_wallet_deltas": true,
+      "animation_after_atomic_save": true
+    },
+    "show_guidance": {
+      "format": "Комната · действие",
+      "show_button": "Показать",
+      "highlights_route_and_target": true,
+      "gesture_alternative": "tap_object_then_destination",
+      "free_exploration_preserves_active_step": true
+    },
+    "resume_and_zero_balance": {
+      "restore_pet_room_and_one_next_step": true,
+      "incomplete_job_restarts_safely_without_income": true,
+      "zero_plan_allowed": true,
+      "manual_period_close_with_summary": true,
+      "no_compensation_second_income_or_unearned_growth": true
+    },
+    "item_states": [
+      "preview",
+      "owned",
+      "equipped_or_in_use"
+    ],
+    "growth_and_finale": {
+      "summary_names_completed_or_missing_condition": true,
+      "no_delta_explanation_when_plan_equals_fact": true,
+      "album_uses_saved_events_only": true,
+      "post_finale_next_period_and_new_goal_available": true
+    },
+    "acceptance": [
+      "First-minute free pet interaction leads to goal and plan in a full-screen world with HUD over it.",
+      "Reward or practice status is visible before entry; transfer is distinct from income; retries, cancellation, and skipped animation do not duplicate income.",
+      "Show leads from any room to the target while preserving the single active step and pet visibility.",
+      "Resume before or after income, cancelled work, and zero current balance preserve confirmed results and allow a new period without real-time waiting.",
+      "Preview, owned, and equipped/in-use are distinguishable and restore after relaunch without a second charge.",
+      "Summary explains growth or the next missing condition; finale leaves a new period and goal available."
+    ]
+  },
+  "needs": {
+    "order": [
+      "satiety",
+      "joy",
+      "cleanliness"
+    ],
+    "initial": [
+      60,
+      65,
+      55
+    ],
+    "paid_care_once_per_period": true,
+    "food_gain": 25,
+    "clean_gain": 25,
+    "free_play_gain": 20,
+    "pet_gain": 5,
+    "close_period_decay": [
+      12,
+      8,
+      10
+    ],
+    "floor": 20,
+    "ceiling": 100,
+    "offline_decay": true,
+    "full_meter_decay_hours": 8,
+    "legacy_save_decay_starts_on_first_resume": true
+  },
+  "production_order": {
+    "plan": "tasks/asset-first-production-2026-09-25.md",
+    "active_phase": "A1_reference_quality_review_and_generator_source_candidates",
+    "gates": [
+      "A0_contract_and_audit",
+      "A1_neutral_bases_and_topology",
+      "A2_rig_deformation",
+      "A3_species_clips_and_contacts",
+      "A4_interactive_props",
+      "A5_assembled_rooms",
+      "A6_quality_preserving_optimization",
+      "A7_application_and_android"
+    ],
+    "android_builds_deferred_until_asset_gates_pass": true,
+    "preserve_master_assets": true,
+    "generation_is_not_animation_acceptance": true,
+    "ui_over_fullscreen_room": true,
+    "visual_model_source": "Meshy_AI_Tripo_or_equivalent_generator",
+    "reference_quality_review_before_generation": true,
+    "per_reference_owner_approval_required": false,
+    "tripo_generation_authorized": true,
+    "first_puppy_source": "assets/source/tripo/2026-09-25/puppy_neutral/model.glb",
+    "first_puppy_source_status": "historical_source_with_rejected_motion_pilot",
+    "assistant_blender_modeling_allowed": false,
+    "pet_contract": "docs/pet-production-contract-2026-09-25.md",
+    "pet_manifest": "design/asset-production-2026-09-25/pet-production-contract.json",
+    "one_master_identity_per_species": true,
+    "pet_completion_order": [
+      "kitten",
+      "puppy",
+      "hamster"
+    ],
+    "growth_and_coats_derive_from_species_master": true,
+    "rejected_candidates_are_not_roster_entries": true,
+    "active_puppy_source": "assets/source/tripo/2026-09-25/puppy_neutral_rig_v2/model.glb",
+    "active_puppy_source_status": "candidate_rig_and_walk_not_accepted"
+  }
+}

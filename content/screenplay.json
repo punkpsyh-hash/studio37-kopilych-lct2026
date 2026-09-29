@@ -1,0 +1,3124 @@
+{
+ "version": "1.0",
+ "canon_version": "1.3",
+ "date": "2026-09-25",
+ "status": "режиссёрский сценарий; источник истины для сцен, не доказательство готовности APK",
+ "roles": {
+  "pet": "выбранный питомец, реплика по видовому голосу; {name} — имя",
+  "parents": "записка или записанная реплика родителей; 3D-моделей взрослых нет",
+  "hint": "единственная активная подсказка HUD",
+  "system": "короткая подпись интерфейса (чек, цена, остаток)"
+ },
+ "cameras": {
+  "living_wide": "гостиная, взгляд изнутри от двери, питомец крупно на переднем плане",
+  "living_box": "гостиная, коробка в центре кадра, пол до краёв",
+  "living_pet_close": "гостиная, питомец по пояс, фон — диван и полка",
+  "living_goal_corner": "гостиная, угол для домика/звёздного уголка",
+  "living_shelf": "гостиная, полки и зоны J05",
+  "living_floor": "гостиная, пол с зонами пыли J06/J02",
+  "kitchen_wide": "кухня изнутри, миска и мойка в кадре",
+  "kitchen_bowl": "кухня, миска и вода крупно, питомец в профиль",
+  "kitchen_sink": "кухня, мойка и сушилка J01",
+  "kitchen_window": "кухня, подоконник для сада",
+  "kitchen_bins": "кухня, ящики с символами J04",
+  "bathroom_wide": "ванная изнутри, ванна и полка с полотенцами",
+  "bathroom_tub": "ванная, бортик ванны/песочная ванночка крупно",
+  "bathroom_shelf": "ванная, полка полотенец J03",
+  "overlay": "3D-комната остаётся фоном; поверх открыт экран бюджета/магазина/итогов"
+ },
+ "templates": {
+  "T_OPENING": {
+   "title": "Стартовые монеты от родителей",
+   "room": "living",
+   "trigger": {
+    "gesture": "tap_note",
+    "button": "Прочитать записку"
+   },
+   "economy": {
+    "kind": "opening",
+    "operation_id": "opening:profile"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "NOTE_PLACE",
+     "camera": "living_pet_close",
+     "props": [
+      "parent_note"
+     ],
+     "sfx": "paper",
+     "line": {
+      "role": "parents",
+      "text": "На новоселье мы даём тебе 100 игровых монет. Давай решим, на что их хватит."
+     }
+    },
+    {
+     "phase": "result",
+     "camera": "living_pet_close",
+     "sfx": "coins_once",
+     "clips": {
+      "kitten": "happy",
+      "puppy": "tail_wag",
+      "hamster": "sniff"
+     }
+    }
+   ],
+   "hud": "Сейчас 0 → 100; подпись источника «От родителей — на новоселье»",
+   "cancel": "записку можно закрыть; монеты начисляются один раз на профиль при первом открытии",
+   "reduced_motion": "записка сразу открыта, счётчик сразу 100",
+   "stage_notes": "только стадия 1"
+  },
+  "T_MOVE": {
+   "title": "Переход и «Показать»",
+   "room": "any",
+   "matrix": [
+    "MOVE_CAT",
+    "MOVE_DOG",
+    "MOVE_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_room_button_or_target",
+    "button": "Показать"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "FLOOR_NAV",
+     "camera": "follow_pet",
+     "clips": {
+      "kitten": "start",
+      "puppy": "start",
+      "hamster": "start"
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "ROOM_PORTAL",
+     "camera": "follow_pet",
+     "clips": {
+      "kitten": "kitten_walk",
+      "puppy": "puppy_walk",
+      "hamster": "hamster_scurry"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "action anchor",
+     "camera": "target_room_wide",
+     "clips": {
+      "kitten": "stop",
+      "puppy": "stop",
+      "hamster": "stop"
+     }
+    }
+   ],
+   "hud": "подсвечена дверь или предмет; маршрут кухня↔ванная всегда через гостиную; подсказка остаётся видна",
+   "cancel": "новое нажатие останавливает питомца на ближайшей безопасной точке пола",
+   "reduced_motion": "камера и питомец сразу у цели",
+   "stage_notes": "длина шага соответствует стадии; поворот — клип turn"
+  },
+  "T_PET": {
+   "title": "Погладить",
+   "room": "any",
+   "matrix": [
+    "PET_CAT",
+    "PET_DOG",
+    "PET_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_or_stroke_pet",
+    "button": "Погладить"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "HEAD_TOUCH",
+     "camera": "living_pet_close",
+     "sfx": "purr_or_species",
+     "clips": {
+      "kitten": "kitten_petted",
+      "puppy": "puppy_petted",
+      "hamster": "hamster_petted"
+     }
+    },
+    {
+     "phase": "result",
+     "clips": {
+      "kitten": "happy",
+      "puppy": "tail_wag",
+      "hamster": "happy"
+     }
+    }
+   ],
+   "hud": "радость +5; денег нет",
+   "cancel": "отпускание пальца возвращает idle",
+   "reduced_motion": "одна поза радости и сердечко",
+   "stage_notes": "якорь HEAD_TOUCH на всех стадиях; аксессуар не мешает"
+  },
+  "T_PLAY_BALL": {
+   "title": "Играть мячом",
+   "room": "living",
+   "matrix": [
+    "PLAY_CAT",
+    "PLAY_DOG",
+    "PLAY_HAM"
+   ],
+   "trigger": {
+    "gesture": "flick_ball",
+    "button": "Играть"
+   },
+   "preconditions": "мяч куплен (ball)",
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "BALL_CONTACT",
+     "camera": "living_floor",
+     "clips": {
+      "kitten": "kitten_walk",
+      "puppy": "puppy_walk",
+      "hamster": "hamster_scurry"
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "BALL_CONTACT",
+     "props": [
+      "ball"
+     ],
+     "sfx": "ball_bounce",
+     "clips": {
+      "kitten": "kitten_play_ball",
+      "puppy": "puppy_play_ball",
+      "hamster": "hamster_play_ball"
+     }
+    },
+    {
+     "phase": "recover",
+     "clips": {
+      "kitten": "recover",
+      "puppy": "recover",
+      "hamster": "recover"
+     }
+    }
+   ],
+   "hud": "радость +20 один раз за период; дальше игра без изменения показателей; денег нет",
+   "cancel": "мяч останавливается на полу, питомец возвращается к idle",
+   "reduced_motion": "мяч у лап, поза радости",
+   "stage_notes": "хомяк катит мяч передними лапами; мяч масштабируется под вид"
+  },
+  "T_FEED": {
+   "title": "Покормить",
+   "room": "kitchen",
+   "matrix": [
+    "FEED_CAT",
+    "FEED_DOG",
+    "FEED_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_bowl",
+    "button": "Покормить · 10"
+   },
+   "economy": {
+    "kind": "buy",
+    "item": "food_refill",
+    "operation_id": "care:food:{period}"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "BOWL_FOOD_CONTACT",
+     "camera": "kitchen_bowl",
+     "clips": {
+      "kitten": "kitten_walk",
+      "puppy": "puppy_walk",
+      "hamster": "hamster_scurry"
+     },
+     "line": {
+      "role": "system",
+      "text": "Корм стоит 10. После покупки останется {after}."
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "MOUTH",
+     "props": [
+      "bowl",
+      "food_portion"
+     ],
+     "sfx": "crunch",
+     "clips": {
+      "kitten": "kitten_feed",
+      "puppy": "puppy_feed",
+      "hamster": "hamster_feed"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "FOREPAW_L/R",
+     "clips": {
+      "kitten": "chew",
+      "puppy": "chew",
+      "hamster": "forepaw_hold"
+     }
+    },
+    {
+     "phase": "recover",
+     "clips": {
+      "kitten": "recover",
+      "puppy": "recover",
+      "hamster": "recover"
+     }
+    }
+   ],
+   "hud": "подтверждение цены → Сейчас −10, сытость +25; повтор в том же периоде бесплатен",
+   "cancel": "до подтверждения — без списания; после подтверждения порция остаётся в миске и доедается при возврате",
+   "reduced_motion": "миска полная → пустая, сытость обновлена",
+   "stage_notes": "морда касается корма на всех стадиях; кепка и бант не входят в миску"
+  },
+  "T_WATER": {
+   "title": "Налить свежую воду",
+   "room": "kitchen",
+   "matrix": [
+    "WATER_CAT",
+    "WATER_DOG",
+    "WATER_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_water_bowl",
+    "button": "Налить воды"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "WATER_SURFACE",
+     "camera": "kitchen_bowl",
+     "props": [
+      "water_bowl"
+     ],
+     "sfx": "pour",
+     "clips": {
+      "kitten": "kitten_drink",
+      "puppy": "puppy_drink",
+      "hamster": "hamster_drink"
+     }
+    },
+    {
+     "phase": "recover",
+     "clips": {
+      "kitten": "recover",
+      "puppy": "recover",
+      "hamster": "recover"
+     }
+    }
+   ],
+   "hud": "вода бесплатна; денег нет",
+   "cancel": "в любой момент, вода остаётся налитой",
+   "reduced_motion": "полная поилка",
+   "stage_notes": "вода не пересекает голову"
+  },
+  "T_CARE": {
+   "title": "Видовой уход",
+   "room": "bathroom",
+   "matrix": [
+    "CARE_CAT",
+    "CARE_DOG",
+    "CARE_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_tub_or_sand",
+    "button": "Уход · 5"
+   },
+   "economy": {
+    "kind": "buy",
+    "item": "clean_care",
+    "operation_id": "care:clean:{period}"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "TUB_RIM",
+     "camera": "bathroom_tub",
+     "clips": {
+      "kitten": "kitten_walk",
+      "puppy": "puppy_walk",
+      "hamster": "hamster_sand_enter"
+     },
+     "line": {
+      "role": "pet",
+      "text": "В ванной каждому подходит свой уход: котёнку и щенку — мягкое мытьё, хомячку — песочная ванночка."
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "FOREPAW_L/R",
+     "props": [
+      "tub",
+      "sand_tray"
+     ],
+     "sfx": "splash_or_sand",
+     "clips": {
+      "kitten": "kitten_paw_wash",
+      "puppy": "puppy_paw_wash",
+      "hamster": "sand_groom"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "TOWEL_CONTACT",
+     "props": [
+      "towel"
+     ],
+     "clips": {
+      "kitten": "kitten_dry",
+      "puppy": "puppy_dry",
+      "hamster": "sand_exit"
+     }
+    },
+    {
+     "phase": "recover",
+     "clips": {
+      "kitten": "recover",
+      "puppy": "recover",
+      "hamster": "recover"
+     }
+    }
+   ],
+   "hud": "подтверждение цены → Сейчас −5, чистота +25",
+   "cancel": "до подтверждения — без списания; после — уход завершается коротко",
+   "reduced_motion": "чистый питомец, полотенце на бортике / песок разглажен",
+   "stage_notes": "хомяк никогда не моется водой и не использует кухонную мойку; щётка пола не используется"
+  },
+  "T_REST": {
+   "title": "Отдых на лежанке",
+   "room": "living",
+   "matrix": [
+    "REST_CAT",
+    "REST_DOG",
+    "REST_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_bed",
+    "button": "Отдохнуть"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "BED_CONTACT",
+     "camera": "living_wide",
+     "props": [
+      "base_bed",
+      "cozy_bed"
+     ],
+     "clips": {
+      "kitten": "kitten_enter_bed",
+      "puppy": "puppy_enter_bed",
+      "hamster": "hamster_enter_bed"
+     }
+    },
+    {
+     "phase": "result",
+     "clips": {
+      "kitten": "curl",
+      "puppy": "lie",
+      "hamster": "curl"
+     }
+    },
+    {
+     "phase": "recover",
+     "anchor": "FLOOR_EXIT",
+     "clips": {
+      "kitten": "rise",
+      "puppy": "rise",
+      "hamster": "exit"
+     }
+    }
+   ],
+   "hud": "бесплатно; базовое место всегда есть, лежанка cozy_bed — улучшенный вариант",
+   "cancel": "нажатие будит питомца",
+   "reduced_motion": "питомец лежит на месте",
+   "stage_notes": "размер лежанки вмещает стадию 3"
+  },
+  "T_ENTER_HOUSE": {
+   "title": "Войти в домик",
+   "room": "living",
+   "matrix": [
+    "HOUSE_CAT",
+    "HOUSE_DOG",
+    "HOUSE_HAM"
+   ],
+   "trigger": {
+    "gesture": "tap_house",
+    "button": "В домик"
+   },
+   "preconditions": "цель house куплена",
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "HOUSE_DOOR",
+     "camera": "living_goal_corner",
+     "clips": {
+      "kitten": "kitten_house_enter",
+      "puppy": "puppy_house_enter",
+      "hamster": "hamster_house_enter"
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "HOUSE_REST",
+     "props": [
+      "house"
+     ],
+     "clips": {
+      "kitten": "rest",
+      "puppy": "rest",
+      "hamster": "rest"
+     }
+    },
+    {
+     "phase": "recover",
+     "anchor": "FLOOR_EXIT",
+     "clips": {
+      "kitten": "exit",
+      "puppy": "exit",
+      "hamster": "exit"
+     }
+    }
+   ],
+   "hud": "бесплатно",
+   "cancel": "питомец выходит",
+   "reduced_motion": "питомец виден в проёме домика",
+   "stage_notes": "проём домика проходит стадия 3 с кепкой"
+  },
+  "T_LOOK_AT": {
+   "title": "Посмотреть на предмет",
+   "room": "any",
+   "matrix": [
+    "GARDEN_ALL",
+    "STORY_REACTION_ALL"
+   ],
+   "trigger": {
+    "gesture": "tap_object",
+    "button": "Посмотреть"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "HEAD_GAZE",
+     "camera": "current",
+     "clips": {
+      "kitten": "species_look",
+      "puppy": "species_look",
+      "hamster": "sniff"
+     }
+    }
+   ],
+   "hud": "бесплатно",
+   "cancel": "в любой момент",
+   "reduced_motion": "поворот головы без анимации тела",
+   "stage_notes": "корень питомца остаётся на полу"
+  },
+  "T_LAMP_TOGGLE": {
+   "title": "Включить/выключить свет",
+   "room": "living",
+   "matrix": [
+    "LAMP_ALL",
+    "SHOP_NIGHTLIGHT"
+   ],
+   "trigger": {
+    "gesture": "tap_lamp",
+    "button": "Свет"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "SWITCH_HIT",
+     "camera": "living_wide",
+     "props": [
+      "lamp",
+      "nightlight"
+     ],
+     "sfx": "click",
+     "clips": {
+      "kitten": "optional_paw_reach",
+      "puppy": "species_look",
+      "hamster": "species_look"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "LAMP_EMISSIVE",
+     "clips": {
+      "kitten": "lamp_toggle",
+      "puppy": "lamp_toggle",
+      "hamster": "lamp_toggle"
+     }
+    }
+   ],
+   "hud": "бесплатно; переключение сохраняется",
+   "cancel": "повторное нажатие",
+   "reduced_motion": "свет меняется сразу",
+   "stage_notes": "к лампе тянется лапа или взгляд, тело не отрывается от пола"
+  },
+  "T_WEAR": {
+   "title": "Надеть/снять аксессуар",
+   "room": "any",
+   "matrix": [
+    "SHOP_BOW",
+    "SHOP_CAP"
+   ],
+   "trigger": {
+    "gesture": "tap_accessory",
+    "button": "Надеть"
+   },
+   "preconditions": "bow или cap куплен; одновременно надет один",
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "HEAD_CAP_SOCKET",
+     "camera": "living_pet_close",
+     "props": [
+      "bow",
+      "cap"
+     ],
+     "clips": {
+      "kitten": "equip_cap",
+      "puppy": "equip_cap",
+      "hamster": "equip_cap"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "HEAD_BOW_SOCKET",
+     "clips": {
+      "kitten": "head_follow",
+      "puppy": "head_follow",
+      "hamster": "head_follow"
+     }
+    }
+   ],
+   "hud": "состояние «используется»; снятие бесплатно",
+   "cancel": "снять одним нажатием",
+   "reduced_motion": "аксессуар сразу на голове",
+   "stage_notes": "проверка на всех стадиях: не закрывает глаза, не пересекает уши"
+  },
+  "T_BUY": {
+   "title": "Покупка желания",
+   "room": "overlay",
+   "matrix": [
+    "SHOP_BALL",
+    "SHOP_STICKERS",
+    "SHOP_BOW",
+    "SHOP_CAP",
+    "SHOP_NIGHTLIGHT",
+    "SHOP_COZY_BED"
+   ],
+   "trigger": {
+    "gesture": "tap_shop_item",
+    "button": "Купить · {price}"
+   },
+   "economy": {
+    "kind": "buy",
+    "operation_id": "buy:{item}"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "{item_title} стоит {price}. После покупки останется {after}."
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "BALL_PLACE",
+     "camera": "living_wide",
+     "props": [
+      "ball",
+      "stickers",
+      "nightlight",
+      "cozy_bed"
+     ],
+     "clips": {
+      "kitten": "ball_preview",
+      "puppy": "ball_preview",
+      "hamster": "ball_preview"
+     }
+    },
+    {
+     "phase": "result",
+     "camera": "living_wide",
+     "sfx": "coins_once",
+     "clips": {
+      "kitten": "species_look",
+      "puppy": "species_look",
+      "hamster": "species_look"
+     }
+    }
+   ],
+   "hud": "состояния предпросмотр → подтверждение → куплено → используется; до подтверждения кошелёк не меняется",
+   "cancel": "«Отложить» закрывает витрину без списания",
+   "reduced_motion": "предмет сразу на месте",
+   "stage_notes": "постоянная вещь покупается один раз; повторная покупка недоступна"
+  },
+  "T_INCOME_RECEIPT": {
+   "title": "Чек дохода",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "auto_after_success",
+    "button": "Забрать"
+   },
+   "economy": {
+    "kind": "income",
+    "operation_id": "income:{period}"
+   },
+   "phases": [
+    {
+     "phase": "result",
+     "camera": "current",
+     "sfx": "coins_once",
+     "line": {
+      "role": "parents",
+      "text": "Спасибо за помощь! Вот 30 игровых монет."
+     },
+     "clips": {
+      "kitten": "happy",
+      "puppy": "tail_wag",
+      "hamster": "happy"
+     }
+    }
+   ],
+   "hud": "Сейчас +30; источник «От родителей — за {job_title}»; оба входа в дела меняют подпись на «Тренировка · без монет»",
+   "cancel": "чек нельзя отменить; начисление уже сохранено и идемпотентно",
+   "reduced_motion": "счётчик сразу с новой суммой",
+   "stage_notes": "—"
+  },
+  "T_PLAN": {
+   "title": "Исходный план периода",
+   "room": "overlay",
+   "matrix": [],
+   "trigger": {
+    "gesture": "drag_coins_to_categories",
+    "button": "+/− по категориям"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "line": {
+      "role": "pet",
+      "text": "Бюджет — это наш план для денег. Сначала узнаем, сколько есть. Потом решим, сколько нужно на сегодня и сколько отложить."
+     }
+    },
+    {
+     "phase": "result",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "Забота {required} · Желания {wants} · Накопления {saving} · Не распределено {free}"
+     }
+    }
+   ],
+   "hud": "три направления Забота/Желания/Накопления; превышение имеющихся денег не подтверждается; план 0/0/0 допустим",
+   "cancel": "закрытие не сохраняет черновик как исходный план",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_REVISE": {
+   "title": "Уточнить план",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "edit_plan",
+    "button": "Уточнить план"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "line": {
+      "role": "pet",
+      "text": "Если планы изменятся, можно пересчитать бюджет. Это тоже часть планирования."
+     }
+    },
+    {
+     "phase": "result",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "Причина: {reason}. Исходный план сохранён."
+     }
+    }
+   ],
+   "hud": "две версии плана рядом; причина из списка (получен доход / отложил желание / другое)",
+   "cancel": "без изменения исходного плана",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_DEPOSIT": {
+   "title": "Вклад в Мечту или Запас",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "drag_coins_to_jar",
+    "button": "Отложить"
+   },
+   "economy": {
+    "kind": "deposit",
+    "operation_id": "deposit:{period}:{to}"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "sfx": "coins_jar",
+     "line": {
+      "role": "system",
+      "text": "Сейчас {current_after} · Мечта {dream_after} · Запас {reserve_after}. Всего денег столько же."
+     }
+    }
+   ],
+   "hud": "перевод не создаёт доход; общая сумма не меняется",
+   "cancel": "до подтверждения без изменения",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_WITHDRAW": {
+   "title": "Снять накопления",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "tap_jar",
+    "button": "Снять"
+   },
+   "economy": {
+    "kind": "withdraw",
+    "operation_id": "withdraw:{period}:{from}"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "После снятия в «{from_title}» останется {after}. Цель станет дальше на {amount}. Снять?"
+     }
+    }
+   ],
+   "hud": "отдельное подтверждение и предпросмотр последствий",
+   "cancel": "«Оставить» — без изменения",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_GOAL_BUY": {
+   "title": "Купить мечту",
+   "room": "living",
+   "matrix": [
+    "GOAL_GARDEN",
+    "GOAL_HOUSE",
+    "GOAL_STARS"
+   ],
+   "trigger": {
+    "gesture": "tap_goal",
+    "button": "Купить мечту · {price}"
+   },
+   "economy": {
+    "kind": "goal_purchase",
+    "operation_id": "goal:{goal}"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "anchor": "HOUSE_PLACE",
+     "camera": "living_goal_corner",
+     "props": [
+      "house",
+      "garden",
+      "stars"
+     ],
+     "clips": {
+      "kitten": "house_preview",
+      "puppy": "house_preview",
+      "hamster": "house_preview"
+     },
+     "line": {
+      "role": "system",
+      "text": "{goal_title} стоит {price}. Оплата из «Мечты», останется {after}."
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "STAR_PROJECTOR",
+     "sfx": "fanfare_soft",
+     "clips": {
+      "kitten": "star_reveal",
+      "puppy": "star_reveal",
+      "hamster": "star_reveal"
+     }
+    }
+   ],
+   "hud": "оплата только из Мечты; остаток остаётся там",
+   "cancel": "до подтверждения — предпросмотр без списания",
+   "reduced_motion": "предмет сразу стоит на месте",
+   "stage_notes": "garden → kitchen_window; house/stars → living_goal_corner"
+  },
+  "T_TRY_UNAFFORDABLE": {
+   "title": "Хочу, но не хватает",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "tap_shop_item",
+    "button": "Купить · {price}"
+   },
+   "economy": {
+    "kind": "attempt_unaffordable",
+    "operation_id": "try:{period}:{item}"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "{item_title} стоит {price}. Не хватает {missing}. Можно пока отложить."
+     }
+    }
+   ],
+   "hud": "кнопка покупки неактивна; точная нехватка; варианты «Отложить» и «Изменить план»; списание 0",
+   "cancel": "закрыть витрину",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_FACT_REVIEW": {
+   "title": "Итоги периода: план и факт",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "tap_period_end",
+    "button": "Итоги дня"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "result",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "План: {plan}. Факт: {fact}. {delta_explanation}"
+     }
+    }
+   ],
+   "hud": "таблица план/факт по трём направлениям; отклонение объясняется; кнопка «Следующий день»",
+   "cancel": "итоги можно закрыть и вернуться; период закрывается только кнопкой",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_GROWTH": {
+   "title": "Рост питомца",
+   "room": "living",
+   "matrix": [
+    "GROWTH_ALL"
+   ],
+   "trigger": {
+    "gesture": "auto_on_period_close",
+    "button": "Посмотреть"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "result",
+     "anchor": "ROOT_FLOOR",
+     "camera": "living_pet_close",
+     "clips": {
+      "kitten": "stage_transition",
+      "puppy": "stage_transition",
+      "hamster": "stage_transition"
+     },
+     "line": {
+      "role": "pet",
+      "text": "Мы уже планировали, заботились, выбирали и откладывали. Наш друг подрос — это след наших решений."
+     }
+    },
+    {
+     "phase": "idle",
+     "clips": {
+      "kitten": "stage_idle_variant",
+      "puppy": "stage_idle_variant",
+      "hamster": "stage_idle_variant"
+     }
+    }
+   ],
+   "hud": "названы выполненные условия: забота, вклад, просмотр план/факт — или один недостающий шаг",
+   "cancel": "—",
+   "reduced_motion": "сразу новая стадия",
+   "stage_notes": "переходы после 3 и 5 зачтённых периодов; аксессуары пересаживаются на сокеты новой стадии"
+  },
+  "T_JOB_TOOL": {
+   "title": "Поручение инструментом",
+   "room": "any",
+   "matrix": [
+    "J01_DISH",
+    "J05_SHELF",
+    "J06_SWEEP"
+   ],
+   "trigger": {
+    "gesture": "drag_tool_over_zones",
+    "button": "Нажать инструмент → нажать зону"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "camera": "job_camera",
+     "anchor": "SPONGE_GRIP",
+     "props": [
+      "sponge",
+      "cloth",
+      "broom",
+      "dustpan"
+     ],
+     "line": {
+      "role": "system",
+      "text": "{reward_label}"
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "SIX_DIRT",
+     "sfx": "scrub_or_sweep",
+     "clips": {
+      "kitten": "species_look",
+      "puppy": "species_look",
+      "hamster": "species_look"
+     }
+    },
+    {
+     "phase": "result",
+     "anchor": "TOOL_HOME",
+     "sfx": "done_chime"
+    }
+   ],
+   "hud": "до старта видна подпись «Награда: 30 монет» или «Тренировка · без монет»; прогресс зон; без таймера",
+   "cancel": "выход до завершения возвращает к безопасному началу, денег 0",
+   "reduced_motion": "зона очищается одним нажатием",
+   "stage_notes": "питомец наблюдает вне рабочей зоны; инструменты уборки пола не касаются питомца"
+  },
+  "T_JOB_PLACE": {
+   "title": "Поручение размещением",
+   "room": "any",
+   "matrix": [
+    "J02_SORT",
+    "J03_TOWEL",
+    "J04_PACK"
+   ],
+   "trigger": {
+    "gesture": "drag_item_to_slot",
+    "button": "Нажать предмет → нажать место"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "approach",
+     "camera": "job_camera",
+     "anchor": "ITEM_GRIP",
+     "props": [
+      "toys_books",
+      "towels",
+      "packages"
+     ],
+     "line": {
+      "role": "system",
+      "text": "{reward_label}"
+     }
+    },
+    {
+     "phase": "contact",
+     "anchor": "THREE_TARGET_SLOTS",
+     "sfx": "place_soft",
+     "clips": {
+      "kitten": "species_look",
+      "puppy": "species_look",
+      "hamster": "species_look"
+     }
+    },
+    {
+     "phase": "result",
+     "sfx": "done_chime"
+    }
+   ],
+   "hud": "широкие слоты; неверное место мягко возвращает предмет; без таймера",
+   "cancel": "выход до завершения — денег 0, предметы на исходных местах",
+   "reduced_motion": "предмет встаёт в слот по нажатию",
+   "stage_notes": "сортировка по форме и значку, не только цвету"
+  },
+  "T_LESSON": {
+   "title": "Финансовая ситуация",
+   "room": "overlay",
+   "trigger": {
+    "gesture": "tap_hint",
+    "button": "Показать"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "camera": "overlay",
+     "line": {
+      "role": "system",
+      "text": "{lesson_prompt}"
+     }
+    },
+    {
+     "phase": "result",
+     "camera": "overlay",
+     "line": {
+      "role": "pet",
+      "text": "{lesson_explanation}"
+     }
+    }
+   ],
+   "hud": "предметное решение с обратной связью; ошибка не отнимает монеты",
+   "cancel": "выход сохраняет прогресс шага, денег 0",
+   "reduced_motion": "—",
+   "stage_notes": "—"
+  },
+  "T_ALBUM": {
+   "title": "Альбом",
+   "room": "living",
+   "matrix": [
+    "ALBUM_ALL"
+   ],
+   "trigger": {
+    "gesture": "tap_album",
+    "button": "Альбом"
+   },
+   "economy": {
+    "kind": "none"
+   },
+   "phases": [
+    {
+     "phase": "contact",
+     "anchor": "ALBUM_PAGE",
+     "camera": "overlay",
+     "props": [
+      "album"
+     ],
+     "sfx": "page",
+     "clips": {
+      "kitten": "album_page_turn",
+      "puppy": "album_page_turn",
+      "hamster": "album_page_turn"
+     }
+    }
+   ],
+   "hud": "карточки периодов и покупок; наклейки, если куплены",
+   "cancel": "закрыть",
+   "reduced_motion": "страница без перелистывания",
+   "stage_notes": "—"
+  }
+ },
+ "scenes": [
+  {
+   "id": "PRO_1",
+   "title": "Кто в коробке?",
+   "period": 0,
+   "room": "living",
+   "camera": "living_box",
+   "props": {
+    "box": "closed",
+    "sofa": "base",
+    "shelf_empty": "base"
+   },
+   "hud": {
+    "wallet": null,
+    "hint": "Выбери друга"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "parents",
+      "text": "Привет! Вот наш ключ. Всё нужное уже есть, а уют придумаем вместе."
+     }
+    },
+    {
+     "camera": "living_box"
+    },
+    {
+     "line": {
+      "role": "hint",
+      "text": "Кто живёт в коробке? Выбери друга."
+     }
+    },
+    {
+     "choice": {
+      "id": "species",
+      "options": [
+       "kitten",
+       "puppy",
+       "hamster"
+      ],
+      "layout": "три одинаково заметные карточки поверх комнаты, без предвыбора"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "skip_intro",
+     "when": "нажат «Пропустить» или включено уменьшение движения",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Выбери друга"
+       }
+      }
+     ],
+     "return_to": "PRO_3"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "PRO_2",
+   "title": "Появление из коробки",
+   "period": 0,
+   "room": "living",
+   "camera": "living_box",
+   "props": {
+    "box": "opening"
+   },
+   "beats": [
+    {
+     "camera": "living_box"
+    },
+    {
+     "line": {
+      "role": "system",
+      "text": "Крышка приподнимается…"
+     }
+    }
+   ],
+   "species_overrides": {
+    "kitten": {
+     "clips": [
+      "box_open",
+      "kitten_box_emerge",
+      "land",
+      "blink"
+     ],
+     "note": "выглядывает, выбирается, короткий прыжок, мягкое приземление"
+    },
+    "puppy": {
+     "clips": [
+      "box_open",
+      "puppy_box_emerge",
+      "land",
+      "tail_wag"
+     ],
+     "note": "выпрыгивает бодро, виляет хвостом"
+    },
+    "hamster": {
+     "clips": [
+      "box_open",
+      "hamster_box_emerge",
+      "land",
+      "sniff"
+     ],
+     "note": "нюхает воздух, короткая перебежка по бортику без падения"
+    }
+   },
+   "branches": [
+    {
+     "id": "reduced_motion",
+     "when": "уменьшение движения",
+     "beats": [
+      {
+       "camera": "living_pet_close"
+      }
+     ],
+     "return_to": "PRO_3"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "PRO_3",
+   "title": "Окрас и имя",
+   "period": 0,
+   "room": "living",
+   "camera": "living_pet_close",
+   "props": {
+    "box": "open"
+   },
+   "beats": [
+    {
+     "choice": {
+      "id": "coat",
+      "options": [
+       "coat_1",
+       "coat_2",
+       "coat_3"
+      ],
+      "layout": "три образца окраса; модель в комнате меняет материал сразу"
+     }
+    },
+    {
+     "choice": {
+      "id": "name",
+      "options": [
+       "default_name",
+       "custom"
+      ],
+      "layout": "поле имени с именем по умолчанию: Персик / Бублик / Плюш"
+     }
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Привет! Я {name}. Теперь это и мой дом."
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "empty_name",
+     "when": "имя стёрто",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Придумай имя или оставь «{default_name}»"
+       }
+      }
+     ],
+     "return_to": "PRO_3"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "PRO_4",
+   "title": "Первая минута",
+   "period": 0,
+   "room": "living",
+   "camera": "living_pet_close",
+   "props": {
+    "parent_note": "on_shelf"
+   },
+   "hud": {
+    "wallet": [
+     0,
+     0,
+     0
+    ],
+    "hint": "Погладь {name}"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "hint",
+      "text": "Погладь {name}"
+     }
+    },
+    {
+     "action": "T_PET"
+    },
+    {
+     "line": {
+      "role": "hint",
+      "text": "На полке записка от родителей"
+     }
+    },
+    {
+     "action": "T_OPENING"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "У нас есть первые монеты. Что сделаем перед покупками?"
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_GOAL",
+   "title": "Выбираем мечту",
+   "period": 1,
+   "room": "living",
+   "camera": "living_goal_corner",
+   "hud": {
+    "wallet": [
+     100,
+     0,
+     0
+    ],
+    "hint": "Гостиная · Выбери мечту"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Для нашего дома есть домик, сад и звёздный светильник. Что тебе нравится?"
+     }
+    },
+    {
+     "choice": {
+      "id": "goal",
+      "options": [
+       "garden",
+       "house",
+       "stars"
+      ],
+      "layout": "три предпросмотра в комнате с ценой 100/120/150; выбор без списания"
+     }
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Выбрать мечту можешь ты. Я помогу посчитать, сколько ещё нужно накопить."
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_PLAN",
+   "title": "Первый план",
+   "period": 1,
+   "lesson": "B02",
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "hint": "Составь план на день"
+   },
+   "beats": [
+    {
+     "action": "T_PLAN"
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "B02"
+     },
+     "note": "разложить 100 на Заботу / Желания / Накопления; превышение не подтверждается, остаток виден"
+    }
+   ],
+   "branches": [
+    {
+     "id": "overspend",
+     "when": "сумма плана больше 100",
+     "beats": [
+      {
+       "line": {
+        "role": "system",
+        "text": "В плане {total}, а денег 100. Уменьши одно направление."
+       }
+      }
+     ],
+     "return_to": "P1_PLAN"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_P01",
+   "title": "Собираем необходимое",
+   "period": 1,
+   "lesson": "P01",
+   "room": "kitchen",
+   "camera": "kitchen_wide",
+   "hud": {
+    "hint": "Кухня · Собери корзину · Награда: 30 монет"
+   },
+   "beats": [
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen"
+     }
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "P01"
+     },
+     "note": "учебная корзина: корм 10 + чистота 5 = 15; лишнее желание мягко возвращается на полку"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Давай решим, что нужно сейчас, а что может подождать."
+     }
+    },
+    {
+     "action": "T_INCOME_RECEIPT",
+     "params": {
+      "amount": 30,
+      "job_title": "помощь с корзиной"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "want_in_basket",
+     "when": "в корзину положен мяч",
+     "beats": [
+      {
+       "line": {
+        "role": "pet",
+        "text": "Мяч можно хотеть. Но в корзину нужного он не входит."
+       }
+      }
+     ],
+     "return_to": "P1_P01"
+    },
+    {
+     "id": "replay",
+     "when": "урок пройден повторно",
+     "beats": [
+      {
+       "line": {
+        "role": "system",
+        "text": "Доход этого дня уже получен. Можно потренироваться."
+       }
+      }
+     ],
+     "return_to": "next"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     130,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_REVISE",
+   "title": "Получен доход — уточняем план",
+   "period": 1,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "hint": "Уточни план: получен доход"
+   },
+   "beats": [
+    {
+     "action": "T_REVISE",
+     "params": {
+      "reason": "Получен доход"
+     },
+     "note": "в демо-маршруте 15/15/30"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     130,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_CARE",
+   "title": "Завтрак и чистые лапы",
+   "period": 1,
+   "room": "kitchen",
+   "camera": "kitchen_bowl",
+   "hud": {
+    "hint": "Кухня · Покорми {name}"
+   },
+   "beats": [
+    {
+     "action": "T_FEED"
+    },
+    {
+     "action": "T_WATER"
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "bathroom",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_CARE"
+    }
+   ],
+   "branches": [
+    {
+     "id": "cancel_feed",
+     "when": "отмена до подтверждения",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Можно покормить позже"
+       }
+      }
+     ],
+     "return_to": "P1_CARE"
+    }
+   ],
+   "species_overrides": {
+    "hamster": {
+     "note": "T_CARE — песочная ванночка вместо мытья лап"
+    }
+   },
+   "exit_state": {
+    "wallet": [
+     115,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_BALL",
+   "title": "Мяч: купить или отложить",
+   "period": 1,
+   "room": "living",
+   "camera": "living_wide",
+   "hud": {
+    "hint": "Гостиная · Новый мяч"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Смотри, мой мяч закатился под стол! А на витрине есть новый."
+     }
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Сначала посчитали заботу. Если хватает на мяч, можно купить. А можно оставить деньги на мечту."
+     }
+    },
+    {
+     "action": "T_BUY",
+     "params": {
+      "item": "ball"
+     }
+    },
+    {
+     "action": "T_PLAY_BALL"
+    }
+   ],
+   "branches": [
+    {
+     "id": "defer_ball",
+     "when": "нажато «Отложить»",
+     "beats": [
+      {
+       "line": {
+        "role": "pet",
+        "text": "Хорошо, подождём. Эти 15 остались у нас."
+       }
+      }
+     ],
+     "return_to": "P1_S02"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "id": "P1_S02",
+   "title": "Мечта и запас",
+   "period": 1,
+   "lesson": "S02",
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "hint": "Отложи на мечту"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Мы уже откладываем на мечту. А для неожиданных дел можно держать отдельный запас."
+     }
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "S02"
+     },
+     "note": "учебная копия показывает альтернативу, основной кошелёк не меняет"
+    },
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "dream",
+      "amount": 25
+     }
+    },
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "reserve",
+      "amount": 5
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     70,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P1_REVIEW",
+   "title": "Итоги первого дня",
+   "period": 1,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "hint": "Итоги дня"
+   },
+   "beats": [
+    {
+     "action": "T_FACT_REVIEW",
+     "note": "план 15/15/30 = факт 15/15/30; отклонения нет"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Сегодня мы позаботились, купили мяч и отложили 30. Завтра продолжим."
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     70,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_PLAN",
+   "title": "План второго дня",
+   "period": 2,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "wallet": [
+     70,
+     25,
+     5
+    ],
+    "hint": "Составь план на день"
+   },
+   "beats": [
+    {
+     "action": "T_PLAN",
+     "note": "исходный план 15/0/25 до дохода"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     70,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_JOB",
+   "title": "Всё на месте",
+   "period": 2,
+   "job": "J02",
+   "room": "living",
+   "camera": "living_floor",
+   "hud": {
+    "hint": "Гостиная · Разложи игрушки · Награда: 30 монет"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Ой, игрушки и книги разбежались. Поможешь вернуть их на места?"
+     }
+    },
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J02"
+     },
+     "see": "JOB_J02"
+    },
+    {
+     "action": "T_INCOME_RECEIPT",
+     "params": {
+      "amount": 30,
+      "job_title": "порядок в гостиной"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "leave_job",
+     "when": "выход до завершения",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Можно закончить потом. Монеты — после всей работы."
+       }
+      }
+     ],
+     "return_to": "P2_JOB"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_REVISE",
+   "title": "Уточняем план",
+   "period": 2,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_REVISE",
+     "params": {
+      "reason": "Получен доход"
+     },
+     "note": "15/0/25 — желаний нет, мяч уже есть"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     100,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_CARE",
+   "title": "Забота",
+   "period": 2,
+   "room": "kitchen",
+   "camera": "kitchen_bowl",
+   "hud": {
+    "hint": "Кухня · Покорми {name}"
+   },
+   "beats": [
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen"
+     }
+    },
+    {
+     "action": "T_FEED"
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "bathroom",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_CARE"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     85,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_PLAY",
+   "title": "Мяч остаётся нашим",
+   "period": 2,
+   "room": "living",
+   "camera": "living_floor",
+   "beats": [
+    {
+     "action": "T_PLAY_BALL"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Мяч у нас уже есть — играть можно бесплатно!"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "ball_deferred",
+     "when": "мяч не куплен в первом дне",
+     "beats": [
+      {
+       "action": "T_LOOK_AT",
+       "params": {
+        "target": "shop_ball"
+       }
+      }
+     ],
+     "return_to": "P2_SAVE"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     85,
+     25,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_SAVE",
+   "title": "Вклад в мечту",
+   "period": 2,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "dream",
+      "amount": 25
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     60,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P2_REVIEW",
+   "title": "Итоги второго дня",
+   "period": 2,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_FACT_REVIEW",
+     "note": "15/0/25 = 15/0/25"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     60,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_PLAN",
+   "title": "План третьего дня",
+   "period": 3,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "wallet": [
+     60,
+     50,
+     5
+    ],
+    "hint": "Составь план на день"
+   },
+   "beats": [
+    {
+     "action": "T_PLAN",
+     "note": "исходный план 15/10/15 — хочется наклейки"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     60,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_JOB",
+   "title": "Полотенца по местам",
+   "period": 3,
+   "job": "J03",
+   "room": "bathroom",
+   "camera": "bathroom_shelf",
+   "hud": {
+    "hint": "Ванная · Сложи полотенца · Награда: 30 монет"
+   },
+   "beats": [
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "bathroom",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J03"
+     },
+     "see": "JOB_J03"
+    },
+    {
+     "action": "T_INCOME_RECEIPT",
+     "params": {
+      "amount": 30,
+      "job_title": "полотенца"
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     90,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_B04",
+   "title": "План можно объяснённо изменить",
+   "period": 3,
+   "lesson": "B04",
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Наклейки подождут. Давай эти 10 отложим на мечту?"
+     }
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "B04"
+     }
+    },
+    {
+     "action": "T_REVISE",
+     "params": {
+      "reason": "Отложили наклейки, 10 — в накопления"
+     },
+     "note": "15/10/15 → 15/0/25; обе версии в истории"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Тогда посмотрим, что можно отложить. Мы можем менять план, а не начинать всё заново."
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     90,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_CARE",
+   "title": "Забота без спешки",
+   "period": 3,
+   "room": "bathroom",
+   "camera": "bathroom_tub",
+   "beats": [
+    {
+     "action": "T_CARE"
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_FEED"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     75,
+     50,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_SAVE",
+   "title": "Вклад",
+   "period": 3,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "dream",
+      "amount": 25
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     50,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P3_REVIEW",
+   "title": "Итоги и рост",
+   "period": 3,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_FACT_REVIEW",
+     "note": "план 15/0/25 = факт; отклонение от исходного объяснено"
+    },
+    {
+     "action": "T_GROWTH",
+     "note": "3 зачтённых периода → стадия 2 «освоившийся друг»"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     50,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_PLAN",
+   "title": "План четвёртого дня",
+   "period": 4,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "wallet": [
+     50,
+     75,
+     5
+    ],
+    "hint": "Составь план на день"
+   },
+   "beats": [
+    {
+     "action": "T_PLAN",
+     "note": "15/0/25"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     50,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_JOB",
+   "title": "Разбираем упаковки",
+   "period": 4,
+   "job": "J04",
+   "room": "kitchen",
+   "camera": "kitchen_bins",
+   "hud": {
+    "hint": "Кухня · Разложи упаковки · Награда: 30 монет"
+   },
+   "beats": [
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen"
+     }
+    },
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J04"
+     },
+     "see": "JOB_J04"
+    },
+    {
+     "action": "T_INCOME_RECEIPT",
+     "params": {
+      "amount": 30,
+      "job_title": "упаковки"
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     80,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_S01",
+   "title": "Какая мечта наша?",
+   "period": 4,
+   "lesson": "S01",
+   "room": "living",
+   "camera": "living_goal_corner",
+   "beats": [
+    {
+     "action": "T_REVISE",
+     "params": {
+      "reason": "Получен доход"
+     }
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Сравниваем не только ценники. Сколько ещё копить до каждой мечты?"
+     }
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "S01"
+     },
+     "note": "три цели: 100/120/150; до домика осталось 45; смена цели не обнуляет 75"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Выберем то, что нравится нам. Потом составим путь маленькими шагами."
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "switch_goal",
+     "when": "ребёнок выбрал другую цель",
+     "beats": [
+      {
+       "line": {
+        "role": "system",
+        "text": "Накопления 75 остаются в «Мечте». До новой цели — {missing}."
+       }
+      }
+     ],
+     "return_to": "P4_CARE"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     80,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_CARE",
+   "title": "Забота",
+   "period": 4,
+   "room": "kitchen",
+   "camera": "kitchen_bowl",
+   "beats": [
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen"
+     }
+    },
+    {
+     "action": "T_FEED"
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "bathroom",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_CARE"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     65,
+     75,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_SAVE",
+   "title": "Вклад",
+   "period": 4,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "dream",
+      "amount": 25
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     40,
+     100,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P4_REVIEW",
+   "title": "Итоги четвёртого дня",
+   "period": 4,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_FACT_REVIEW"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     40,
+     100,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_PLAN",
+   "title": "План к новоселью",
+   "period": 5,
+   "room": "living",
+   "camera": "overlay",
+   "hud": {
+    "wallet": [
+     40,
+     100,
+     5
+    ],
+    "hint": "Составь план на день"
+   },
+   "beats": [
+    {
+     "action": "T_PLAN",
+     "note": "15/0/25"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     40,
+     100,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_JOB",
+   "title": "Полки к новоселью",
+   "period": 5,
+   "job": "J05",
+   "room": "living",
+   "camera": "living_shelf",
+   "hud": {
+    "hint": "Гостиная · Протри полки · Награда: 30 монет"
+   },
+   "beats": [
+    {
+     "action": "T_JOB_TOOL",
+     "params": {
+      "job": "J05"
+     },
+     "see": "JOB_J05"
+    },
+    {
+     "action": "T_INCOME_RECEIPT",
+     "params": {
+      "amount": 30,
+      "job_title": "полки к новоселью"
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     70,
+     100,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_CARE",
+   "title": "Забота",
+   "period": 5,
+   "room": "kitchen",
+   "camera": "kitchen_bowl",
+   "beats": [
+    {
+     "action": "T_REVISE",
+     "params": {
+      "reason": "Получен доход"
+     }
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "kitchen"
+     }
+    },
+    {
+     "action": "T_FEED"
+    },
+    {
+     "action": "T_MOVE",
+     "params": {
+      "to": "bathroom",
+      "via": "living"
+     }
+    },
+    {
+     "action": "T_CARE"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     55,
+     100,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_SAVE",
+   "title": "Последний вклад",
+   "period": 5,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_DEPOSIT",
+     "params": {
+      "to": "dream",
+      "amount": 25
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     30,
+     125,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_P06",
+   "title": "Хочу, но пока не хватает",
+   "period": 5,
+   "lesson": "P06",
+   "room": "living",
+   "camera": "living_wide",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Какая мягкая лежанка!"
+     }
+    },
+    {
+     "action": "T_TRY_UNAFFORDABLE",
+     "params": {
+      "item": "cozy_bed"
+     }
+    },
+    {
+     "action": "T_LESSON",
+     "params": {
+      "lesson": "P06"
+     },
+     "note": "лежанка 35, в «Сейчас» 30: не хватает 5; выбор — отложить или перепланировать; списание 0"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Лежанка подождёт. У меня уже есть место для сна."
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     30,
+     125,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_GOAL",
+   "title": "Покупаем мечту",
+   "period": 5,
+   "room": "living",
+   "camera": "living_goal_corner",
+   "hud": {
+    "hint": "Гостиная · Мечта ждёт"
+   },
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "В «Мечте» 125. Домик стоит 120. Хватает!"
+     }
+    },
+    {
+     "action": "T_GOAL_BUY",
+     "params": {
+      "goal": "house"
+     }
+    },
+    {
+     "action": "T_ENTER_HOUSE"
+    }
+   ],
+   "branches": [
+    {
+     "id": "not_enough",
+     "when": "накоплено меньше цены цели",
+     "beats": [],
+     "return_to": "FIN_B"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     30,
+     5,
+     5
+    ]
+   }
+  },
+  {
+   "id": "P5_REVIEW",
+   "title": "Итоги новоселья",
+   "period": 5,
+   "room": "living",
+   "camera": "overlay",
+   "beats": [
+    {
+     "action": "T_FACT_REVIEW"
+    },
+    {
+     "action": "T_GROWTH",
+     "note": "5 зачтённых периодов → стадия 3 «уверенный друг»"
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     30,
+     5,
+     5
+    ]
+   }
+  },
+  {
+   "id": "FIN_A",
+   "title": "Финал А · Наш дом хранит наши решения",
+   "period": 5,
+   "room": "living",
+   "camera": "living_goal_corner",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Помнишь пустую полку? Теперь в доме есть вещь, которую мы выбрали и на которую накопили."
+     }
+    },
+    {
+     "action": "T_ENTER_HOUSE"
+    },
+    {
+     "action": "T_ALBUM",
+     "note": "карточка новоселья сохраняется в альбоме"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Праздник закончится, а наш дом останется. Какой будет следующая мечта?"
+     }
+    }
+   ],
+   "exit_state": {
+    "wallet": [
+     30,
+     5,
+     5
+    ]
+   }
+  },
+  {
+   "id": "FIN_B",
+   "title": "Финал Б · Честный прогресс",
+   "period": 5,
+   "main_path": false,
+   "room": "living",
+   "camera": "living_goal_corner",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Мечта ещё впереди, а наш путь уже виден. Накопления сохранились — продолжим, когда захотим."
+     }
+    },
+    {
+     "line": {
+      "role": "system",
+      "text": "Отложено {dream}. До «{goal_title}» осталось {missing}."
+     }
+    },
+    {
+     "action": "T_ALBUM",
+     "note": "тёплая карточка пути с вкладами по дням"
+    }
+   ],
+   "branches": [
+    {
+     "id": "continue",
+     "when": "нажато «Продолжить»",
+     "beats": [],
+     "return_to": "SVC_FREEPLAY"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J01",
+   "title": "Чистая посуда",
+   "period": 0,
+   "main_path": false,
+   "job": "J01",
+   "room": "kitchen",
+   "camera": "kitchen_sink",
+   "hud": {
+    "hint": "Кухня · Помой посуду · {reward_label}"
+   },
+   "beats": [
+    {
+     "action": "T_JOB_TOOL",
+     "params": {
+      "job": "J01"
+     },
+     "note": "губкой по шести пятнам → смыть пену → закрыть кран"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Тарелки блестят!"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "tap_left_open",
+     "when": "кран не закрыт",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Закрой кран — и работа готова"
+       }
+      }
+     ],
+     "return_to": "JOB_J01"
+    },
+    {
+     "id": "leave",
+     "when": "выход до завершения",
+     "beats": [],
+     "return_to": "next"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J02",
+   "title": "Всё на месте",
+   "period": 0,
+   "main_path": false,
+   "job": "J02",
+   "room": "living",
+   "camera": "living_floor",
+   "beats": [
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J02"
+     },
+     "note": "три игрушки/книги по отмеченным широким местам"
+    }
+   ],
+   "branches": [
+    {
+     "id": "wrong_slot",
+     "when": "предмет положен не туда",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Этой книге нужна полка"
+       }
+      }
+     ],
+     "return_to": "JOB_J02"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J03",
+   "title": "Полотенца по местам",
+   "period": 0,
+   "main_path": false,
+   "job": "J03",
+   "room": "bathroom",
+   "camera": "bathroom_shelf",
+   "beats": [
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J03"
+     },
+     "note": "сложить два полотенца и положить на полку"
+    }
+   ],
+   "branches": [
+    {
+     "id": "wrong_slot",
+     "when": "неверное место",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Полотенце вернулось — попробуй полку"
+       }
+      }
+     ],
+     "return_to": "JOB_J03"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J04",
+   "title": "Разбираем упаковки",
+   "period": 0,
+   "main_path": false,
+   "job": "J04",
+   "room": "kitchen",
+   "camera": "kitchen_bins",
+   "beats": [
+    {
+     "action": "T_JOB_PLACE",
+     "params": {
+      "job": "J04"
+     },
+     "note": "четыре чистые безопасные упаковки по символам формы/значка; без утверждений о правилах реальной переработки"
+    }
+   ],
+   "branches": [
+    {
+     "id": "wrong_bin",
+     "when": "не тот ящик",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Посмотри на значок на коробке"
+       }
+      }
+     ],
+     "return_to": "JOB_J04"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J05",
+   "title": "Полки к новоселью",
+   "period": 0,
+   "main_path": false,
+   "job": "J05",
+   "room": "living",
+   "camera": "living_shelf",
+   "beats": [
+    {
+     "action": "T_JOB_TOOL",
+     "params": {
+      "job": "J05"
+     },
+     "note": "протереть три зоны и вернуть салфетку"
+    }
+   ],
+   "branches": [
+    {
+     "id": "cloth_left",
+     "when": "салфетка не убрана",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Верни салфетку на место"
+       }
+      }
+     ],
+     "return_to": "JOB_J05"
+    }
+   ]
+  },
+  {
+   "id": "JOB_J06",
+   "title": "Подметём вместе",
+   "period": 0,
+   "main_path": false,
+   "job": "J06",
+   "room": "living",
+   "camera": "living_floor",
+   "beats": [
+    {
+     "action": "T_JOB_TOOL",
+     "params": {
+      "job": "J06"
+     },
+     "note": "веником собрать три зоны пыли в совок, высыпать, убрать веник и совок"
+    },
+    {
+     "line": {
+      "role": "pet",
+      "text": "Я посижу тут и посмотрю, как ты подметаешь."
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "pan_not_empty",
+     "when": "совок не высыпан",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Высыпь совок и убери инструменты"
+       }
+      }
+     ],
+     "return_to": "JOB_J06"
+    }
+   ]
+  },
+  {
+   "id": "SVC_RETURN",
+   "title": "Возврат после перезапуска",
+   "period": 0,
+   "main_path": false,
+   "room": "saved",
+   "camera": "saved_room_wide",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Ты вернулся! Продолжим: {next_step}."
+     }
+    },
+    {
+     "action": "T_PET"
+    }
+   ],
+   "branches": [
+    {
+     "id": "unfinished_job",
+     "when": "работа была прервана",
+     "beats": [
+      {
+       "line": {
+        "role": "hint",
+        "text": "Работа начнётся сначала. Монеты — после завершения."
+       }
+      }
+     ],
+     "return_to": "next"
+    }
+   ]
+  },
+  {
+   "id": "SVC_ZERO",
+   "title": "Нулевой баланс",
+   "period": 0,
+   "main_path": false,
+   "room": "living",
+   "camera": "living_wide",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Сейчас монет нет. Можно помочь по дому — или просто поиграть."
+     }
+    },
+    {
+     "action": "T_PLAN",
+     "note": "план 0/0/0 допустим"
+    },
+    {
+     "action": "T_WATER"
+    },
+    {
+     "action": "T_PET"
+    }
+   ],
+   "branches": [
+    {
+     "id": "to_job",
+     "when": "нажато «Показать»",
+     "beats": [
+      {
+       "action": "T_MOVE"
+      }
+     ],
+     "return_to": "JOB_J01"
+    }
+   ]
+  },
+  {
+   "id": "SVC_FREEPLAY",
+   "title": "Свободная игра после истории",
+   "period": 6,
+   "main_path": false,
+   "room": "living",
+   "camera": "living_wide",
+   "beats": [
+    {
+     "line": {
+      "role": "pet",
+      "text": "Можно не спешить. Посмотрим, что уже радует нас, и решим, чего хочется дальше."
+     }
+    },
+    {
+     "choice": {
+      "id": "new_goal",
+      "options": [
+       "garden",
+       "house",
+       "stars"
+      ],
+      "layout": "купленная цель отмечена «Уже дома»"
+     }
+    },
+    {
+     "action": "T_PLAN"
+    }
+   ],
+   "branches": [
+    {
+     "id": "next_period",
+     "when": "итоги дня закрыты",
+     "beats": [],
+     "return_to": "SVC_FREEPLAY"
+    }
+   ]
+  },
+  {
+   "id": "SVC_ADULT",
+   "title": "Раздел взрослого",
+   "period": 0,
+   "main_path": false,
+   "room": "overlay",
+   "camera": "overlay",
+   "beats": [
+    {
+     "line": {
+      "role": "system",
+      "text": "Для взрослых: реши пример, чтобы войти."
+     }
+    },
+    {
+     "line": {
+      "role": "system",
+      "text": "Зачем игра · пройденные темы · прогресс без оценок · справка · демопрофиль · сброс и удаление с подтверждением"
+     }
+    }
+   ],
+   "branches": [
+    {
+     "id": "wrong_answer",
+     "when": "неверный ответ барьера",
+     "beats": [],
+     "return_to": "SVC_ADULT"
+    }
+   ]
+  }
+ ],
+ "reconciliation": [
+  {
+   "source": "story-v3 / mechanics-v3",
+   "was": "Свежая вода за 5 монет",
+   "now": "Вода бесплатна (canon economy.free_actions)",
+   "scene": "T_WATER"
+  },
+  {
+   "source": "story-v3",
+   "was": "Игра в гостиной за 5",
+   "now": "Игра купленным мячом бесплатна; мяч 15 покупается один раз",
+   "scene": "T_PLAY_BALL, P2_PLAY"
+  },
+  {
+   "source": "mechanics-v3",
+   "was": "18 миссий, доход через B01/P01/P04/P05/B06",
+   "now": "6 обязательных ситуаций; доход: P01 в П1, работы J02–J05 в П2–П5; общий лимит +30 за период",
+   "scene": "P1_P01, P2_JOB…P5_JOB"
+  },
+  {
+   "source": "story-v3 акт 5",
+   "was": "Цели выбираются на ярмарке",
+   "now": "Цели выбираются предпросмотром в комнате в начале П1 (S01 — сравнение в П4); отдельной локации ярмарки нет",
+   "scene": "P1_GOAL, P4_S01"
+  },
+  {
+   "source": "story-v3 акт 4",
+   "was": "Три конверта",
+   "now": "Три кошелька Сейчас/Мечта/Запас и урок S02",
+   "scene": "P1_S02"
+  },
+  {
+   "source": "старый каталог",
+   "was": "Шампунь, витамины, поводок, плюшевый друг",
+   "now": "Не используются; каталог — 8 товаров канона",
+   "scene": "T_BUY"
+  },
+  {
+   "source": "старый Flutter-код",
+   "was": "Лесовичок среди питомцев",
+   "now": "Ровно котёнок, щенок, хомяк",
+   "scene": "PRO_1"
+  },
+  {
+   "source": "interaction-matrix",
+   "was": "Нет якоря для записки родителей",
+   "now": "Новый якорь NOTE_PLACE на полке гостиной — добавить в этап 3",
+   "scene": "T_OPENING"
+  },
+  {
+   "source": "interaction-matrix",
+   "was": "Предметы описаны свободным текстом",
+   "now": "Сценарий вводит машинные ID предметов (bowl, tub, sand_tray…); сопоставить с моделями в этапе 3",
+   "scene": "asset-list.csv"
+  },
+  {
+   "source": "спецификация сценария",
+   "was": "pytest",
+   "now": "unittest из стандартной библиотеки (pytest не установлен)",
+   "scene": "scripts/screenplay/test_validate.py"
+  }
+ ]
+}

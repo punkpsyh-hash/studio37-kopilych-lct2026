@@ -1,0 +1,661 @@
+{
+  "version": 1,
+  "generator": "Blender mobile LOD from existing service-generated masters; no replacement geometry",
+  "image_max": 512,
+  "target_triangles": 12000,
+  "assets": [
+    {
+      "id": "dish_plate",
+      "source": "assets/source/tripo/2026-09-25/dish_plate/model.glb",
+      "source_sha256": "3803d5766ffd0715e0aeb610ed90b187fff59dd08feba951be285bc59881ddfe",
+      "derivative": "app/assets/game3d/props/dish_plate.glb",
+      "source_triangles": 1486100,
+      "derivative_triangles": 29722,
+      "bytes": 1230044,
+      "bounds_m": {
+        "min": [
+          -0.1397,
+          -0.14,
+          0.0
+        ],
+        "max": [
+          0.1397,
+          0.14,
+          0.0549
+        ]
+      },
+      "contact_nodes": [
+        "dish_plate_grip",
+        "dish_plate_contact",
+        "dish_plate_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "19f31e9b-1ea7-4cdb-ae47-c83afe64e4d9",
+        "reference_sha256": "99693b793001f0eb58d84d2ef3badcbde2d01f78274525a78d11ca7fefee25b9",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "kitchen_sponge",
+      "source": "assets/source/tripo/2026-09-25/kitchen_sponge/model.glb",
+      "source_sha256": "be1ba8d95c1f7797db56abccc36d60ae9eb9829cbd05c3ace3273c8a267cadbe",
+      "derivative": "app/assets/game3d/props/kitchen_sponge.glb",
+      "source_triangles": 1471186,
+      "derivative_triangles": 29423,
+      "bytes": 1163612,
+      "bounds_m": {
+        "min": [
+          -0.0602,
+          -0.09,
+          0.0
+        ],
+        "max": [
+          0.0602,
+          0.09,
+          0.0787
+        ]
+      },
+      "contact_nodes": [
+        "kitchen_sponge_grip",
+        "kitchen_sponge_contact",
+        "kitchen_sponge_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "f4c27c26-6c67-4d44-b1e1-1916e4d4265b",
+        "reference_sha256": "c9f7210cb101f6f85e43b05a2faebc08ff28f6bdcc55a8e07d61b13f33bb2082",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "dish_rack",
+      "source": "assets/production/missing-props-2026-09-25/dish_rack/dish_rack.glb",
+      "source_sha256": "bae98fae33eef73863d9c1ef092301b2b5077a0289a5ba5880b4ec77c4dcdf75",
+      "derivative": "app/assets/game3d/props/dish_rack.glb",
+      "source_triangles": 326288,
+      "derivative_triangles": 30000,
+      "derivative_sha256": "4409c488945da68401ea78697dbc79454af8ba2e72f3d270f3a198db6397d58a",
+      "bytes": 1496140,
+      "bounds_m": {
+        "min": [
+          -0.24,
+          -0.000000015,
+          -0.174034238
+        ],
+        "max": [
+          0.24,
+          0.215421259,
+          0.174034238
+        ]
+      },
+      "contact_nodes": [],
+      "status": "service_master_30k_welded_rebaked_visual_pass_runtime_qa_pending",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-7231-7074-9b49-7119f3e05cd5",
+        "reference_sha256": "446c225b6c7beac4471da9ff91221f834b31a28f8835399389bf393654063261",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "single_book",
+      "source": "assets/source/meshy/batch-2026-09-23-account-2/living_living_single_book_v1/model.glb",
+      "source_sha256": "dfdaacca9f4411b00884fbea5267c83a8a7b7e22fec86df3522117ac4b8fa497",
+      "derivative": "app/assets/game3d/props/single_book.glb",
+      "source_triangles": 467114,
+      "derivative_triangles": 12000,
+      "bytes": 618992,
+      "bounds_m": {
+        "min": [
+          -0.1352,
+          -0.0512,
+          0.0
+        ],
+        "max": [
+          0.1352,
+          0.0512,
+          0.3
+        ]
+      },
+      "contact_nodes": [
+        "single_book_grip",
+        "single_book_contact",
+        "single_book_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0cd17-247b-72ec-80c2-19621b6c89ac",
+        "reference_sha256": null,
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "teddy_toy",
+      "source": "assets/source/meshy/batch-2026-09-23-account-2/living_living_teddy_toy_v1/model.glb",
+      "source_sha256": "4c28b44d132b1181c1e97811cd44044a5673bbca59a2681ba952df073540a7ab",
+      "derivative": "app/assets/game3d/props/teddy_toy.glb",
+      "source_triangles": 360924,
+      "derivative_triangles": 12000,
+      "bytes": 520308,
+      "bounds_m": {
+        "min": [
+          -0.1309,
+          -0.1171,
+          0.0
+        ],
+        "max": [
+          0.1309,
+          0.1171,
+          0.34
+        ]
+      },
+      "contact_nodes": [
+        "teddy_toy_grip",
+        "teddy_toy_contact",
+        "teddy_toy_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0cd17-3aae-724c-826c-3ee205789a4e",
+        "reference_sha256": null,
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "toy_chest",
+      "source": "assets/source/meshy/story-gaps-2026-09-23/04_toy_chest/remesh/model.glb",
+      "source_sha256": "0a99f61ce78c5e3dd207d396e8a8b46ae792ca9b62f365d2ebdd8eee971e1760",
+      "derivative": "app/assets/game3d/props/toy_chest.glb",
+      "source_triangles": 17402,
+      "derivative_triangles": 12000,
+      "bytes": 1714364,
+      "bounds_m": {
+        "min": [
+          -0.39,
+          -0.273,
+          0.0
+        ],
+        "max": [
+          0.39,
+          0.273,
+          0.3858
+        ]
+      },
+      "contact_nodes": [
+        "toy_chest_grip",
+        "toy_chest_contact",
+        "toy_chest_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0cdc9-387d-751e-a8b7-e37bcdf17005",
+        "reference_sha256": null,
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "unfolded_towel",
+      "source": "assets/source/tripo/2026-09-25/unfolded_towel/model.glb",
+      "source_sha256": "7b395bd5d029418b7d507d1ee14a694654edff38adbd6e4b62edb24366f4731f",
+      "derivative": "app/assets/game3d/props/unfolded_towel.glb",
+      "source_triangles": 1458180,
+      "derivative_triangles": 29163,
+      "bytes": 1233492,
+      "bounds_m": {
+        "min": [
+          -0.2078,
+          -0.26,
+          -0.0
+        ],
+        "max": [
+          0.2078,
+          0.26,
+          0.0689
+        ]
+      },
+      "contact_nodes": [
+        "unfolded_towel_grip",
+        "unfolded_towel_contact",
+        "unfolded_towel_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "71b33d98-62bb-427c-bcaa-3bbd09c61c34",
+        "reference_sha256": "7935527cae845d074e7933ea334e142f54153e63e414751a314adeb59e297da5",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "folded_towel",
+      "source": "assets/source/meshy/batch-2026-09-23-account-2/bathroom_small_folded_towel/model.glb",
+      "source_sha256": "acc66a03ad43d58412ccc68bb1140f6cd159bb9dce0d20b5e95cfed09d4b44c6",
+      "derivative": "app/assets/game3d/props/folded_towel.glb",
+      "source_triangles": 2283340,
+      "derivative_triangles": 45666,
+      "bytes": 1510184,
+      "bounds_m": {
+        "min": [
+          -0.1528,
+          -0.17,
+          0.0
+        ],
+        "max": [
+          0.1528,
+          0.17,
+          0.1546
+        ]
+      },
+      "contact_nodes": [
+        "folded_towel_grip",
+        "folded_towel_contact",
+        "folded_towel_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0cd08-a12b-7045-9913-d31d4b061f09",
+        "reference_sha256": null,
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "towel_shelf",
+      "source": "assets/source/meshy/batch-2026-09-23/bathroom_towel_shelf/model.glb",
+      "source_sha256": "4bf6d5faa4febbe8c5e945d3be503033eed468ddcf45ffdaa41856973cb5226a",
+      "derivative": "app/assets/game3d/props/towel_shelf.glb",
+      "source_triangles": 217912,
+      "derivative_triangles": 12000,
+      "bytes": 614040,
+      "bounds_m": {
+        "min": [
+          -0.2006,
+          -0.1356,
+          0.0
+        ],
+        "max": [
+          0.2006,
+          0.1356,
+          0.92
+        ]
+      },
+      "contact_nodes": [
+        "towel_shelf_grip",
+        "towel_shelf_contact",
+        "towel_shelf_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0ccc9-9b42-74af-a2c9-61aa26b6726a",
+        "reference_sha256": null,
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "package_circle",
+      "source": "assets/production/missing-props-2026-09-25/package_circle/package_circle.glb",
+      "source_sha256": "6cfba34f6f28f51ef7cacf99bc11ba6dc054d04f01a22fa13d022f9c0775a7c0",
+      "derivative": "app/assets/game3d/props/package_circle.glb",
+      "source_triangles": 110838,
+      "derivative_triangles": 12000,
+      "bytes": 510604,
+      "bounds_m": {
+        "min": [
+          -0.1295,
+          -0.13,
+          0.0
+        ],
+        "max": [
+          0.1295,
+          0.13,
+          0.1869
+        ]
+      },
+      "contact_nodes": [
+        "package_circle_grip",
+        "package_circle_contact",
+        "package_circle_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-4b1b-7373-8914-53437b5dbd2d",
+        "reference_sha256": "619404e2cfde3d979bf5ebfbb3ae04ccdca937c8d458f2293a72882ef3c7a5e2",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "package_square",
+      "source": "assets/production/missing-props-2026-09-25/package_square/package_square.glb",
+      "source_sha256": "0e3a453c6b00131db127aa362bdc367ee00d092bb27514875b80cfa7d919ba29",
+      "derivative": "app/assets/game3d/props/package_square.glb",
+      "source_triangles": 123360,
+      "derivative_triangles": 12000,
+      "bytes": 522580,
+      "bounds_m": {
+        "min": [
+          -0.13,
+          -0.0817,
+          -0.0
+        ],
+        "max": [
+          0.13,
+          0.0817,
+          0.2487
+        ]
+      },
+      "contact_nodes": [
+        "package_square_grip",
+        "package_square_contact",
+        "package_square_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-3ef1-7587-bb3d-94a6c44f9c24",
+        "reference_sha256": "9af2b22b4fbc1828a00486611b016f38ce7acb0eec166f4a64816594fe73a54e",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "package_star",
+      "source": "assets/production/missing-props-2026-09-25/package_star/package_star.glb",
+      "source_sha256": "fa6374878007ee59f664501ad66be541d32b62908a273f94bca21e5fa0b81e40",
+      "derivative": "app/assets/game3d/props/package_star.glb",
+      "source_triangles": 282192,
+      "derivative_triangles": 12000,
+      "bytes": 611808,
+      "bounds_m": {
+        "min": [
+          -0.0927,
+          -0.05,
+          -0.0
+        ],
+        "max": [
+          0.0927,
+          0.05,
+          0.2596
+        ]
+      },
+      "contact_nodes": [
+        "package_star_grip",
+        "package_star_contact",
+        "package_star_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-65ec-764f-a9d8-a704acff8ae2",
+        "reference_sha256": "54e149eb3ad954ffe76bc864c588ae0ed49b1fbafa994c9110745385be8740a4",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "package_triangle",
+      "source": "assets/production/missing-props-2026-09-25/package_triangle/package_triangle.glb",
+      "source_sha256": "cf256173d6b375d0dd6e1eaa223282d78c4ea510197575596cb58bb7aa16085b",
+      "derivative": "app/assets/game3d/props/package_triangle.glb",
+      "source_triangles": 134760,
+      "derivative_triangles": 12000,
+      "bytes": 532432,
+      "bounds_m": {
+        "min": [
+          -0.1065,
+          -0.0732,
+          -0.0
+        ],
+        "max": [
+          0.1065,
+          0.0732,
+          0.26
+        ]
+      },
+      "contact_nodes": [
+        "package_triangle_grip",
+        "package_triangle_contact",
+        "package_triangle_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-5897-777d-906e-a419cfa6c9ac",
+        "reference_sha256": "7111d08d862268d0459978f0f8bc1d28d72eb45b8d81925a8d35644c774b965a",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "sorting_bin",
+      "source": "assets/production/missing-props-2026-09-25/sorting_bin/sorting_bin.glb",
+      "source_sha256": "64a720d57f9796c4fdadfabb3f4fca0ebfd0f230de91499716dc6c357daa8b27",
+      "derivative": "app/assets/game3d/props/sorting_bin.glb",
+      "source_triangles": 371124,
+      "derivative_triangles": 11998,
+      "bytes": 686668,
+      "bounds_m": {
+        "min": [
+          -0.26,
+          -0.1834,
+          -0.0
+        ],
+        "max": [
+          0.26,
+          0.1834,
+          0.2514
+        ]
+      },
+      "contact_nodes": [
+        "sorting_bin_grip",
+        "sorting_bin_contact",
+        "sorting_bin_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-30c5-731c-bb62-b6296bf314a7",
+        "reference_sha256": "c10a99f6f8da6f66806f7b70b78ed651856a0a0c00f77455fd049eee1fe1dcf4",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "wiping_cloth",
+      "source": "assets/source/tripo/2026-09-25/wiping_cloth/model.glb",
+      "source_sha256": "34c9bbf4b0b8993609218993e79f006d3b0acbd31bd2108fe5328167ccce7dd7",
+      "derivative": "app/assets/game3d/props/wiping_cloth.glb",
+      "source_triangles": 1429906,
+      "derivative_triangles": 28598,
+      "bytes": 1354380,
+      "bounds_m": {
+        "min": [
+          -0.14,
+          -0.1276,
+          0.0
+        ],
+        "max": [
+          0.14,
+          0.1276,
+          0.0576
+        ]
+      },
+      "contact_nodes": [
+        "wiping_cloth_grip",
+        "wiping_cloth_contact",
+        "wiping_cloth_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "ddbecb9d-b27a-48da-8a20-1658bae17f77",
+        "reference_sha256": "599b3d3beb478dc80fcf6c711b3c364d120b82e86729c902965cdad9ffeb0954",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "short_broom",
+      "source": "assets/source/tripo/2026-09-25/short_broom/model.glb",
+      "source_sha256": "d129edd8cacac8fd8b6da924822b03d65887c11b15c32f026d4686821cf7f235",
+      "derivative": "app/assets/game3d/props/short_broom.glb",
+      "source_triangles": 1475505,
+      "derivative_triangles": 29509,
+      "bytes": 1251284,
+      "bounds_m": {
+        "min": [
+          -0.2254,
+          -0.2374,
+          0.0
+        ],
+        "max": [
+          0.2254,
+          0.2374,
+          0.92
+        ]
+      },
+      "contact_nodes": [
+        "short_broom_grip",
+        "short_broom_contact",
+        "short_broom_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "58573dd0-ddb9-4448-9692-8256615b8e6a",
+        "reference_sha256": "3186a2dc187276b098f4cd2bf852245c9b4b5ee29a758c564b729c0e6a83d0df",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "dustpan",
+      "source": "assets/source/tripo/2026-09-25/dustpan/model.glb",
+      "source_sha256": "dd2c5f46875e4ab70766a33a0eb535b26fa09362bedc439e2b48c75d3d8567da",
+      "derivative": "app/assets/game3d/props/dustpan.glb",
+      "source_triangles": 1449994,
+      "derivative_triangles": 28999,
+      "bytes": 1232916,
+      "bounds_m": {
+        "min": [
+          -0.21,
+          -0.1586,
+          0.0
+        ],
+        "max": [
+          0.21,
+          0.1586,
+          0.2458
+        ]
+      },
+      "contact_nodes": [
+        "dustpan_grip",
+        "dustpan_contact",
+        "dustpan_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "39fce6c2-5c91-4254-9b87-d143cc5067ae",
+        "reference_sha256": "8059c73ae5ecba83249837bb209efe5aa2ae98e88c1b52099ded0b58e23bb225",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "bathtub_quality",
+      "source": "assets/source/meshy/apartment/bathtub.glb",
+      "source_sha256": "95ac064959c4bf1b118ce5829c9f90750205e14e2998c0eccf6b279208af176a",
+      "derivative": "app/assets/game3d/props/bathtub_quality.glb",
+      "derivative_sha256": "35457aa50b7b863643f75cd2a993a91a3262601c0f942257265964b6c2cd1fc7",
+      "source_triangles": 167298,
+      "derivative_triangles": 60000,
+      "bytes": 5287760,
+      "texture_max": 1024,
+      "bounds_m": {
+        "min": [-0.9521, -0.5177, -0.8196],
+        "max": [0.9511, 0.5146, 0.8186]
+      },
+      "status": "service_master_mobile_derivative_desktop_ab_pass_android_pending",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0c842-de8b-75d1-b966-33bd68d81738",
+        "reference_sha256": "7133ac7ba4e2611091ddfeac8d501ad7729326d85cb7f874bd69034e5fac8ed5",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "slippers_pair",
+      "source": "assets/source/meshy/batch-2026-09-23-account-2/bathroom_small_slippers_pair/model.glb",
+      "source_sha256": "2b0481253496b9c1c60a7c52753aca5833b4731a82eafc9462a36feb7fd092ce",
+      "derivative": "app/assets/game3d/props/slippers_pair.glb",
+      "derivative_sha256": "7ec035fd1a054c2c1283916344578c344b0c2e0ba50a98cf9ce18d4dd416ac5d",
+      "source_triangles": 1101472,
+      "derivative_triangles": 30000,
+      "bytes": 1325160,
+      "texture_max": 1024,
+      "bounds_m": {
+        "min": [-0.8551, -0.3261, -0.9540],
+        "max": [0.8548, 0.3249, 0.9500]
+      },
+      "status": "service_master_mobile_derivative_desktop_ab_pass_android_pending",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0cd09-acb4-703f-b317-1f2511ff6e7d",
+        "reference_sha256": "ca788ed2e8d515ed118b8f3f7c4226344aa3ebfbf542e6aec333370033119fb2",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    },
+    {
+      "id": "parent_note",
+      "source": "assets/production/missing-props-2026-09-25/parent_note/parent_note.glb",
+      "source_sha256": "95bf950f0e1867443c36acfd07f557b76fe0b8044095016bb2fb074c8f5b9b83",
+      "provenance": {
+        "provider": "Meshy",
+        "task_id": "01a0da39-065a-70b1-bbfb-fb84a20698b7",
+        "reference_sha256": "c4b718b313e37cbd91357bb9ac4f747bce48127612dfeff306ed5ca1d0ef1185",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      },
+      "derivative": "app/assets/game3d/props/parent_note.glb",
+      "source_triangles": 76704,
+      "derivative_triangles": 11999,
+      "bytes": 438700,
+      "bounds_m": {
+        "min": [
+          -0.075,
+          -0.0417,
+          0.0
+        ],
+        "max": [
+          0.075,
+          0.0417,
+          0.1007
+        ]
+      },
+      "contact_nodes": [
+        "parent_note_grip",
+        "parent_note_contact",
+        "parent_note_target"
+      ],
+      "status": "service_master_mobile_derivative_visual_review_required"
+    },
+    {
+      "id": "towel_attempt8_416k",
+      "source": "assets/source/tripo/2026-09-25/unfolded_towel/model.glb",
+      "source_sha256": "7b395bd5d029418b7d507d1ee14a694654edff38adbd6e4b62edb24366f4731f",
+      "derivative": "app/assets/game3d/props/towel_attempt8_416k.glb",
+      "derivative_sha256": "6d68fd0995001e2fb794df2f83f9cb42423ccf20fdb199d806e3688474c4a54b",
+      "derivative_triangles": 416000,
+      "runtime_config_sha256": "75b5365c1e5e17a51734e68bd556a2cc32fdf98c015d8b9dda42326cd2477cab",
+      "runtime_correction_sha256": "3e61a3cc19bfa4ff3c9a80a2a7b4d00f7bfdf19e6294761bdbb4067f58bac1f1",
+      "runtime_module_sha256": "d99de202b18ca86e74ef342a12e12cdcf8dcb3eaea4e9da3e5b4905be61a9d1f",
+      "status": "desktop_browser_interaction_pass_android_visual_performance_pending",
+      "provenance": {
+        "provider": "Tripo",
+        "task_id": "71b33d98-62bb-427c-bcaa-3bbd09c61c34",
+        "reference_sha256": "7935527cae845d074e7933ea334e142f54153e63e414751a314adeb59e297da5",
+        "rights_status": "project_generated_service_output_terms_not_reverified"
+      }
+    }
+  ]
+}

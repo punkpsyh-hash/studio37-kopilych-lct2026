@@ -1,0 +1,14 @@
+* text=auto
+*.glb binary
+*.onnx binary
+*.bin binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ogg binary
+*.mp3 binary
+*.pdf binary
+*.pptx binary
+*.jar binary
+*.so binary

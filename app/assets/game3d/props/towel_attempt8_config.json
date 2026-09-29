@@ -1,0 +1,39 @@
+{
+  "status": "bounded_CPU_GPU_pass_art_mobile_pending",
+  "asset": "model.glb",
+  "assetSha256": "6d68fd0995001e2fb794df2f83f9cb42423ccf20fdb199d806e3688474c4a54b",
+  "masterSha256": "7b395bd5d029418b7d507d1ee14a694654edff38adbd6e4b62edb24366f4731f",
+  "flattenY": 0.08,
+  "bendLengths": [
+    0.08,
+    0.16
+  ],
+  "midY": [
+    0,
+    0.025339269544929266
+  ],
+  "extraY": 0.08,
+  "midYEnvelope": {
+    "activation": "smoothstep(fold2Progress)",
+    "lowerLines": [
+      [
+        -0.005288516171276569,
+        0
+      ],
+      [
+        -0.0034027239307761192,
+        -0.001939147406767905
+      ],
+      [
+        -0.003390118945389986,
+        -0.0019518339582890577
+      ]
+    ],
+    "upperLines": [
+      [
+        0.0559670552611351,
+        0
+      ]
+    ]
+  }
+}

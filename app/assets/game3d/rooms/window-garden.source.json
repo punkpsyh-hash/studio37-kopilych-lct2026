@@ -1,0 +1,10 @@
+{
+  "asset": "window-garden.webp",
+  "type": "2D exterior illustration applied to existing service-room window surfaces",
+  "generatedWith": "OpenAI imagegen, 2026-09-29",
+  "prompt": "Peaceful illustrated garden trees, blue sky, clouds and morning sunlight; no frame, glass, text, animals, people or buildings.",
+  "encoding": "WebP, 1024 px wide, ffmpeg quality 65",
+  "sha256": "9ba59b334a137d539d0317bcc02fa899f81d5329185440e04b6d375d2a1a5a51",
+  "bytes": 51722,
+  "scope": "living and kitchen window materials only; no 3D geometry added or replaced"
+}

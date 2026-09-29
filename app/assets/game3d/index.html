@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; media-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>Комната питомца</title>
+  <link rel="stylesheet" href="./runtime.css">
+</head>
+<body>
+  <main id="scene-shell" aria-label="Трёхмерная комната питомца">
+    <canvas id="scene" aria-label="Интерактивная трёхмерная комната"></canvas>
+    <div id="status" class="status" role="status" aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+      <span id="status-text">Загружаем комнату…</span>
+    </div>
+    <section id="dish-ui" class="dish-ui" aria-label="Поручение по дому" hidden>
+      <div class="dish-ui__header">
+        <p id="dish-eyebrow" class="dish-ui__eyebrow">Работа по дому · кухня</p>
+        <h1 id="dish-instruction">Протри тарелку губкой</h1>
+        <p id="dish-progress" role="status" aria-live="polite">Чистых участков: 0 из 6</p>
+      </div>
+      <div class="dish-ui__actions">
+        <button id="dish-cancel" type="button" class="dish-ui__secondary">Назад в комнату</button>
+        <button id="dish-step" type="button">Протереть участок</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./runtime.js"></script>
+</body>
+</html>

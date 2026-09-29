@@ -1,0 +1,2145 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-26T03:00:51.456946+03:00",
+  "status": "mobile_room_assets_exported_not_android_profiled",
+  "sourceBlend": "assets/production/meshy-only-apartment-v3/apartment-meshy-room-additions-v3.blend",
+  "coordinateSystem": {
+    "handedness": "right",
+    "upAxis": "+Y",
+    "forwardIntoRoom": "-Z",
+    "metersPerUnit": 1,
+    "floorHeight": 0,
+    "blenderToGltf": "(x,y,z) -> (x,z,-y)"
+  },
+  "petScaleMeters": {
+    "kitten": 0.62,
+    "puppy": 0.65,
+    "hamster": 0.42
+  },
+  "candidatePetModels": {
+    "integrated-v1": {
+      "kitten": "kitten-integrated-v1-preview.glb",
+      "puppy": "puppy-integrated-v3-preview.glb",
+      "hamster": "hamster-integrated-v1-preview.glb"
+    }
+  },
+  "runtimeAccessoryPetModels": {
+    "kitten": "kitten-integrated-v1-preview.glb",
+    "puppy": "puppy-integrated-v3-preview.glb",
+    "hamster": "hamster-integrated-v1-preview.glb"
+  },
+  "petActionContacts": {
+    "feed": {
+      "room": "kitchen",
+      "clip": "feed",
+      "propNode": "PROP__kitchen__food_bowl",
+      "contactPhase": 0.5,
+      "effector": "muzzle"
+    },
+    "water": {
+      "room": "kitchen",
+      "clip": "drink",
+      "propNode": "PROP__kitchen__water_bowl",
+      "contactPhase": 0.5,
+      "effector": "muzzle"
+    },
+    "play": {
+      "room": "living",
+      "clip": "play_ball",
+      "propNode": "PROP__living__ball",
+      "contactPhase": 0.52,
+      "effector": "front_right_paw",
+      "maximumPenetrationMeters": 0.002,
+      "maximumGapMeters": 0.01,
+      "targetGapMeters": 0.003,
+      "propMotion": {
+        "startPhase": 0.52,
+        "finishPhase": 1,
+        "travelMeters": 0.13,
+        "hopMeters": 0.02,
+        "rollDegrees": 240
+      }
+    },
+    "stars": {
+      "room": "living",
+      "clip": "look",
+      "propNode": "PROP__living__goal_stars",
+      "target": [
+        0.6,
+        0,
+        -1.5
+      ],
+      "semantic": "owned_fixture_toggle"
+    },
+    "clean_water": {
+      "room": "bathroom",
+      "clip": "paw_wash",
+      "propNode": "PROP__bathroom__bathtub",
+      "contactPhase": 0.22,
+      "effector": "front_right_paw",
+      "target": [
+        -1.05,
+        0,
+        -1.82
+      ],
+      "targetHeightMeters": 0.46,
+      "entryArcMeters": 0.65,
+      "contactSurfaceHeightMeters": 0.56,
+      "faceCameraDuringContact": true,
+      "semantic": "dip_paw_then_wipe"
+    },
+    "clean_sand": {
+      "room": "bathroom",
+      "clip": "sand_groom",
+      "propNode": "PROP__bathroom__sand_bath",
+      "contactPhase": 0.48,
+      "effector": "body_and_forepaws",
+      "semantic": "dig_roll_wipe_in_sand"
+    },
+    "nightlight": {
+      "room": "living",
+      "clip": "look",
+      "propNode": "PROP__living__nightlight",
+      "target": [
+        -0.42,
+        0,
+        -0.58
+      ],
+      "semantic": "owned_fixture_toggle"
+    }
+  },
+  "petTransformPolicy": {
+    "roomRootScale": 1,
+    "spawnRootScale": 1,
+    "sameScaleAcrossRooms": true,
+    "note": "Pet species normalize once in their asset pipeline; rooms never rescale a chosen pet."
+  },
+  "nodeNaming": {
+    "room": "ROOM__{room}",
+    "static": "ROOM__{room}__static",
+    "prop": "PROP__{room}__{id}",
+    "anchor": "ANCHOR__{room}__{id}",
+    "target": "TARGET__{room}__{id}",
+    "hit": "HIT__{room}__{id}",
+    "camera": "CAMERA__{room}__default"
+  },
+  "rooms": [
+    {
+      "id": "living",
+      "file": "living.glb",
+      "rootNode": "ROOM__living",
+      "staticNode": "ROOM__living__static",
+      "bounds": {
+        "min": [
+          -3,
+          0,
+          -2.75
+        ],
+        "max": [
+          3,
+          3.2,
+          2.75
+        ]
+      },
+      "floor": {
+        "height": 0,
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "camera": {
+        "position": [
+          0.16,
+          0.82,
+          2.62
+        ],
+        "target": [
+          0.1,
+          0.22,
+          -1.3
+        ],
+        "fovDegrees": 68,
+        "near": 0.05,
+        "far": 30,
+        "node": "CAMERA__living__default"
+      },
+      "petSpawn": {
+        "node": "ANCHOR__living__pet_spawn",
+        "position": [
+          0.15,
+          0,
+          1.25
+        ]
+      },
+      "actions": [
+        {
+          "id": "play",
+          "approachNode": "ANCHOR__living__play_approach",
+          "targetNode": "TARGET__living__play",
+          "camera": {
+            "position": [
+              -1,
+              0.78,
+              2.62
+            ],
+            "target": [
+              -0.7,
+              0.22,
+              1
+            ],
+            "fovDegrees": 60,
+            "near": 0.05,
+            "far": 30
+          },
+          "approach": [
+            -0.8,
+            0,
+            0.85
+          ],
+          "target": [
+            -0.8,
+            0,
+            1.25
+          ]
+        },
+        {
+          "id": "job_j02",
+          "approach": [
+            -0.62,
+            0,
+            0.48
+          ],
+          "watch": {
+            "portrait": [
+              1,
+              0,
+              1
+            ],
+            "landscape": [
+              -0.15,
+              0,
+              0.45
+            ]
+          },
+          "target": [
+            0.2,
+            0.25,
+            0.72
+          ],
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              0.2,
+              0.45,
+              0.72
+            ],
+            "size": [
+              0.76,
+              0.5,
+              0.72
+            ]
+          },
+          "camera": {
+            "position": [
+              1.55,
+              1.42,
+              2.08
+            ],
+            "target": [
+              0.56,
+              0.5,
+              0.1
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          },
+          "landscapeResultCamera": {
+            "position": [
+              2.65,
+              1.4,
+              0.6
+            ],
+            "target": [
+              1.75,
+              0.85,
+              -1.5
+            ],
+            "fovDegrees": 36,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "job_j05",
+          "approach": [
+            0.35,
+            0,
+            -0.58
+          ],
+          "target": [
+            2.47,
+            0.582,
+            -2.25
+          ],
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              2.48,
+              1.023,
+              -2.24
+            ],
+            "size": [
+              1.05,
+              1.8,
+              0.7
+            ]
+          },
+          "camera": {
+            "position": [
+              2.48,
+              1.183,
+              -1.07
+            ],
+            "target": [
+              2.47,
+              0.582,
+              -2.26
+            ],
+            "fovDegrees": 48,
+            "near": 0.05,
+            "far": 30
+          },
+          "landscapeResultCamera": {
+            "position": [
+              2.65,
+              1.4,
+              0.6
+            ],
+            "target": [
+              1.75,
+              0.85,
+              -1.5
+            ],
+            "fovDegrees": 36,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "job_j06",
+          "approach": [
+            -0.18,
+            0,
+            -0.1
+          ],
+          "target": [
+            2.12,
+            0.08,
+            -0.3
+          ],
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              2.12,
+              0.14,
+              -0.3
+            ],
+            "size": [
+              0.95,
+              0.3,
+              0.85
+            ]
+          },
+          "camera": {
+            "position": [
+              2.72,
+              1.25,
+              1
+            ],
+            "target": [
+              2.12,
+              0.16,
+              -0.3
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          },
+          "landscapeResultCamera": {
+            "position": [
+              2.65,
+              1.4,
+              0.6
+            ],
+            "target": [
+              1.75,
+              0.85,
+              -1.5
+            ],
+            "fovDegrees": 36,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "goal_house",
+          "approachNode": "ANCHOR__living__goal_house_approach",
+          "targetNode": "TARGET__living__goal_house"
+        },
+        {
+          "id": "goal_stars",
+          "approachNode": "ANCHOR__living__goal_stars_approach",
+          "targetNode": "TARGET__living__goal_stars"
+        },
+        {
+          "id": "nightlight",
+          "approach": [
+            -0.15,
+            0,
+            -0.2
+          ],
+          "target": [
+            -0.42,
+            0,
+            -0.58
+          ],
+          "targetNode": "PROP__living__nightlight",
+          "hitShape": {
+            "type": "aabb",
+            "size": [
+              0.5,
+              0.48,
+              0.5
+            ]
+          }
+        }
+      ],
+      "interactives": [
+        {
+          "id": "lamp_main",
+          "node": "PROP__living__floor_lamp",
+          "hitNode": "HIT__living__lamp_main",
+          "targetNode": "TARGET__living__lamp_main",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              -2.59,
+              1.05,
+              -1.69
+            ],
+            "size": [
+              0.82,
+              2.05,
+              0.82
+            ]
+          },
+          "states": [
+            "off",
+            "on"
+          ],
+          "initialState": "off"
+        }
+      ],
+      "petScenarios": [
+        {
+          "id": "rest_bed",
+          "requiredOwned": "cozy_bed",
+          "propNode": "PROP__living__cozy_bed",
+          "approach": [
+            -1.62,
+            0,
+            0.7
+          ],
+          "target": [
+            -2.24,
+            0,
+            1.2
+          ],
+          "targetHeightMeters": 0.285,
+          "entryArcMeters": 0.16,
+          "clips": [
+            "lie_down",
+            "sleep",
+            "rise"
+          ],
+          "camera": {
+            "position": [
+              -2.5,
+              0.65,
+              2.62
+            ],
+            "target": [
+              -1.8,
+              0.25,
+              0.4
+            ],
+            "fovDegrees": 60,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "rest_house",
+          "requiredOwned": "house",
+          "propNode": "PROP__living__goal_house",
+          "approach": [
+            0.88,
+            0,
+            0.72
+          ],
+          "target": [
+            0.88,
+            0,
+            0.1
+          ],
+          "targetHeightMeters": 0.006,
+          "clips": [
+            "lie_down",
+            "sleep",
+            "rise"
+          ],
+          "camera": {
+            "position": [
+              1.9,
+              1.1,
+              1.65
+            ],
+            "target": [
+              0.88,
+              0.3,
+              0.08
+            ],
+            "fovDegrees": 68,
+            "near": 0.05,
+            "far": 30
+          }
+        }
+      ],
+      "doors": [
+        {
+          "id": "door_kitchen",
+          "toRoom": "kitchen",
+          "hitNode": "HIT__living__door_kitchen",
+          "approachNode": "ANCHOR__living__door_kitchen_approach",
+          "targetNode": "TARGET__living__door_kitchen",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              -2.92,
+              1.18,
+              0
+            ],
+            "size": [
+              0.42,
+              2.45,
+              1.6
+            ]
+          }
+        },
+        {
+          "id": "door_bathroom",
+          "toRoom": "bathroom",
+          "hitNode": "HIT__living__door_bathroom",
+          "approachNode": "ANCHOR__living__door_bathroom_approach",
+          "targetNode": "TARGET__living__door_bathroom",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              2.92,
+              1.18,
+              0
+            ],
+            "size": [
+              0.42,
+              2.45,
+              1.6
+            ]
+          }
+        }
+      ],
+      "navigation": {
+        "type": "conservative_aabb_zones",
+        "zones": [
+          {
+            "id": "front",
+            "min": [
+              -1.85,
+              0,
+              0.72
+            ],
+            "max": [
+              1.85,
+              0,
+              2.3
+            ]
+          },
+          {
+            "id": "door_crossing",
+            "min": [
+              -2.75,
+              0,
+              -0.38
+            ],
+            "max": [
+              2.75,
+              0,
+              0.68
+            ]
+          },
+          {
+            "id": "kitchen_lane",
+            "min": [
+              -2.75,
+              0,
+              0.4
+            ],
+            "max": [
+              -1.35,
+              0,
+              1.25
+            ]
+          },
+          {
+            "id": "bathroom_lane",
+            "min": [
+              1.35,
+              0,
+              0.4
+            ],
+            "max": [
+              2.75,
+              0,
+              1.25
+            ]
+          }
+        ]
+      },
+      "initialHiddenNodes": [
+        "PROP__living__goal_house",
+        "PROP__living__goal_stars",
+        "PROP__living__cozy_bed"
+      ],
+      "metrics": {
+        "bytes": 51973892,
+        "sha256": "11192b63fc90af7ce8dc9efe7193e0a213e660fe9bb3ade5c16ba9ce1a461ff5",
+        "triangles": 543358,
+        "primitives": 19,
+        "nodes": 27,
+        "meshes": 8,
+        "materials": 19,
+        "textures": 39,
+        "images": 39
+      },
+      "adoption": {
+        "asset": "introBox",
+        "placement": {
+          "position": [
+            -0.2,
+            0,
+            -0.1
+          ],
+          "scale": 0.65
+        },
+        "camera": {
+          "position": [
+            -0.2,
+            2.4,
+            1.2
+          ],
+          "target": [
+            -0.2,
+            0.15,
+            -0.1
+          ],
+          "fovDegrees": 50,
+          "near": 0.05,
+          "far": 20,
+          "framingNote": "Interior portrait camera; room fills screen, box and pet landing stay between floating HUD controls."
+        },
+        "petLanding": {
+          "roomPosition": [
+            0.24,
+            0,
+            1.05
+          ]
+        },
+        "petSpawn": {
+          "node": "ANCHOR__living__adoption_pet_spawn",
+          "localPosition": [
+            0,
+            0.20708,
+            0
+          ],
+          "roomPosition": [
+            -0.2,
+            0.134602,
+            -0.1
+          ],
+          "jumpPeakMeters": 0.28
+        },
+        "boxNode": "PROP__living__adoption_box",
+        "bodyNode": "PROP__living__adoption_box_body",
+        "lidNode": "PROP__living__adoption_lid",
+        "openStateNodes": [
+          "PROP__living__adoption_box_body",
+          "PROP__living__adoption_lid"
+        ],
+        "authoredState": "open",
+        "lidOpenRotationDegrees": 72,
+        "lidClosedOffset": [
+          0.07,
+          -0.17,
+          0.68
+        ]
+      },
+      "jobProps": [
+        {
+          "id": "single_book",
+          "jobId": "J02",
+          "file": "single_book.glb",
+          "placement": {
+            "position": [
+              0.28,
+              0.125,
+              0.38
+            ],
+            "rotationDegrees": [
+              0,
+              18,
+              0
+            ],
+            "scale": 1.05
+          }
+        },
+        {
+          "id": "single_book_2",
+          "jobId": "J02",
+          "file": "single_book.glb",
+          "placement": {
+            "position": [
+              0.78,
+              0.121,
+              0.52
+            ],
+            "rotationDegrees": [
+              0,
+              -14,
+              0
+            ],
+            "scale": 1.02
+          }
+        },
+        {
+          "id": "teddy_toy",
+          "jobId": "J02",
+          "file": "teddy_toy.glb",
+          "placement": {
+            "position": [
+              0.35,
+              0.097,
+              0.58
+            ],
+            "rotationDegrees": [
+              0,
+              -12,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "toy_chest",
+          "jobId": "SCENE",
+          "file": "toy_chest.glb",
+          "placement": {
+            "position": [
+              0.6,
+              0.001,
+              -2.14
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "wiping_cloth",
+          "jobId": "J05",
+          "file": "wiping_cloth.glb",
+          "placement": {
+            "position": [
+              2.48,
+              0.16225462238575591,
+              -2.25
+            ],
+            "rotationDegrees": [
+              0,
+              10,
+              0
+            ],
+            "scale": 0.62
+          }
+        },
+        {
+          "id": "short_broom",
+          "jobId": "J06",
+          "file": "short_broom.glb",
+          "placement": {
+            "position": [
+              1.78,
+              0,
+              -0.66
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              -18
+            ],
+            "scale": 0.58
+          }
+        },
+        {
+          "id": "dustpan",
+          "jobId": "J06",
+          "file": "dustpan.glb",
+          "placement": {
+            "position": [
+              2.35,
+              0,
+              -0.3
+            ],
+            "rotationDegrees": [
+              0,
+              -90,
+              0
+            ],
+            "scale": 0.62
+          }
+        },
+        {
+          "id": "waste_bin",
+          "jobId": "J06",
+          "file": "sorting_bin.glb",
+          "placement": {
+            "position": [
+              2.52,
+              0,
+              -0.52
+            ],
+            "rotationDegrees": [
+              0,
+              -12,
+              0
+            ],
+            "scale": 0.5
+          }
+        },
+        {
+          "id": "parent_note",
+          "jobId": "SCENE",
+          "file": "parent_note.glb",
+          "placement": {
+            "position": [
+              2.72,
+              1.163,
+              -2.400193909280491
+            ],
+            "rotationDegrees": [
+              -12,
+              -8,
+              2
+            ],
+            "scale": 1
+          }
+        }
+      ],
+      "runtimeStaging": {
+        "nodeTransforms": [
+          {
+            "node": "PROP__living__goal_house",
+            "offset": [
+              -1.02,
+              0,
+              -1.45
+            ],
+            "reason": "Keep the purchased pet house visible in the portrait room composition"
+          },
+          {
+            "node": "PROP__living__cozy_bed",
+            "offset": [
+              0,
+              0,
+              -1
+            ],
+            "scale": 1.4,
+            "reason": "Fit all three pets and keep the service bed inside the furnished room for portrait rest framing"
+          },
+          {
+            "node": "PROP__living__floor_lamp",
+            "offset": [
+              0,
+              -0.0086,
+              0
+            ],
+            "reason": "Keep the floor lamp left of the sofa, with its existing service base on the floor"
+          },
+          {
+            "node": "QUALITY__bookcase",
+            "offset": [
+              1.3,
+              0.003,
+              -1.12
+            ],
+            "reason": "Place the existing service bookcase in the rear-right corner with floor and baseboard clearance"
+          },
+          {
+            "node": "QUALITY__rug",
+            "offset": [
+              0,
+              0,
+              -0.2
+            ],
+            "scale": 0.7,
+            "reason": "Keep the detailed Meshy rug under the pet and coffee table without filling the entire foreground"
+          }
+        ],
+        "materialTransforms": [
+          {
+            "material": "Material_0.004",
+            "offset": [
+              4.5645171999931335,
+              0.1706166975498199,
+              -1.2992603647708891
+            ],
+            "scale": 0.85,
+            "reason": "Place the existing storybook_trio on the measured middle shelf; uniform scale preserves its mesh and texture while clearing the shelf above"
+          },
+          {
+            "material": "Material_0.047",
+            "offset": [
+              0.3,
+              0.001,
+              0
+            ],
+            "reason": "Leave space to the left of the existing sofa for the floor lamp"
+          },
+          {
+            "material": "Material_0.044",
+            "offset": [
+              0.3,
+              0.001,
+              0.2
+            ],
+            "reason": "Center the coffee table in front of the sofa with a clear gap"
+          },
+          {
+            "material": "Material_0.069",
+            "offset": [
+              0.3,
+              0.0035,
+              0.2
+            ],
+            "reason": "Keep the existing budget envelopes on the moved coffee table"
+          },
+          {
+            "material": "Material_0.046",
+            "offset": [
+              0.7516545951366425,
+              0.21971909689903257,
+              -0.8221021080017092
+            ],
+            "scale": 0.6,
+            "reason": "Support the existing plant on the right side of the existing chest used as a side cabinet"
+          }
+        ],
+        "meshCopies": [
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__more_storybooks",
+            "offset": [
+              0.3,
+              -0.428,
+              0
+            ],
+            "reason": "Reuse the service book trio on the lower shelf with its spines above the shelf"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__upper_storybooks",
+            "offset": [
+              0.12,
+              0.418,
+              0
+            ],
+            "reason": "Reuse the existing service book trio on the otherwise empty top shelf"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__lower_books_left",
+            "offset": [
+              -0.3,
+              -0.428,
+              0
+            ],
+            "reason": "Fill the lower shelf with the existing Meshy book trio"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__lower_books_mid_left",
+            "offset": [
+              -0.1,
+              -0.428,
+              0
+            ],
+            "reason": "Fill the lower shelf with the existing Meshy book trio"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__lower_books_mid_right",
+            "offset": [
+              0.1,
+              -0.428,
+              0
+            ],
+            "reason": "Fill the lower shelf with the existing Meshy book trio"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__middle_books_left",
+            "offset": [
+              -0.27,
+              0,
+              0
+            ],
+            "reason": "Add books to the open side of the middle shelf"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__middle_books_right",
+            "offset": [
+              0.27,
+              0,
+              0
+            ],
+            "reason": "Add books to the open side of the middle shelf"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__upper_books_left",
+            "offset": [
+              -0.3,
+              0.418,
+              0
+            ],
+            "reason": "Fill the top shelf with the existing Meshy book trio"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__upper_books_mid_left",
+            "offset": [
+              -0.09,
+              0.418,
+              0
+            ],
+            "reason": "Fill the top shelf with the existing Meshy book trio"
+          },
+          {
+            "material": "Material_0.004",
+            "sourceNode": "ROOM__living__static__mesh_11",
+            "node": "PROP__living__upper_books_right",
+            "offset": [
+              0.33,
+              0.418,
+              0
+            ],
+            "reason": "Fill the top shelf with the existing Meshy book trio"
+          }
+        ]
+      },
+      "optionalFixtures": [
+        {
+          "id": "nightlight",
+          "file": "nightlight.glb",
+          "node": "PROP__living__nightlight",
+          "placement": {
+            "position": [
+              -0.75,
+              0,
+              -0.9
+            ],
+            "rotationDegrees": [
+              0,
+              18,
+              0
+            ],
+            "scale": 1,
+            "snapToSurface": true
+          },
+          "light": {
+            "color": 16765619,
+            "intensity": 0.45,
+            "glowMin": 0.11,
+            "glowMax": 0.36
+          }
+        }
+      ]
+    },
+    {
+      "id": "kitchen",
+      "file": "kitchen.glb",
+      "rootNode": "ROOM__kitchen",
+      "staticNode": "ROOM__kitchen__static",
+      "bounds": {
+        "min": [
+          -2.4,
+          0,
+          -2.75
+        ],
+        "max": [
+          2.4,
+          3.2,
+          2.75
+        ]
+      },
+      "floor": {
+        "height": 0,
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "camera": {
+        "position": [
+          0,
+          1.0,
+          2.6
+        ],
+        "target": [
+          -0.15,
+          0.34,
+          -1.4
+        ],
+        "fovDegrees": 62,
+        "near": 0.05,
+        "far": 30,
+        "node": "CAMERA__kitchen__default"
+      },
+      "petSpawn": {
+        "node": "ANCHOR__kitchen__pet_spawn",
+        "position": [
+          -0.15,
+          0,
+          1.05
+        ]
+      },
+      "actions": [
+        {
+          "id": "feed",
+          "approachNode": "ANCHOR__kitchen__feed_approach",
+          "targetNode": "TARGET__kitchen__feed",
+          "camera": {
+            "position": [
+              0.48,
+              0.78,
+              2.52
+            ],
+            "target": [
+              -0.38,
+              0.2,
+              1.25
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          },
+          "approach": [
+            -0.42,
+            0,
+            0.7
+          ],
+          "target": [
+            -0.42,
+            0,
+            1.02
+          ]
+        },
+        {
+          "id": "water",
+          "approachNode": "ANCHOR__kitchen__water_approach",
+          "targetNode": "TARGET__kitchen__water",
+          "camera": {
+            "position": [
+              0.35,
+              0.78,
+              2.52
+            ],
+            "target": [
+              0.21,
+              0.2,
+              1.25
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          },
+          "approach": [
+            0.19,
+            0,
+            0.7
+          ],
+          "target": [
+            0.19,
+            0,
+            1.02
+          ]
+        },
+        {
+          "id": "wash_dishes",
+          "approachNode": "ANCHOR__kitchen__dish_approach",
+          "targetNode": "TARGET__kitchen__dish_sink",
+          "camera": {
+            "position": [
+              -0.12,
+              1.85,
+              -1.12
+            ],
+            "target": [
+              -0.16,
+              0.65,
+              -2.08
+            ],
+            "fovDegrees": 44,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "job_j04",
+          "approach": [
+            -0.62,
+            0,
+            0.2
+          ],
+          "watch": {
+            "portrait": [
+              -1.12,
+              0,
+              0.7
+            ],
+            "landscape": [
+              -1.12,
+              0,
+              0.7
+            ]
+          },
+          "target": [
+            -1.85,
+            0.48,
+            -1.22
+          ],
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              -1.85,
+              0.5,
+              -1.22
+            ],
+            "size": [
+              0.72,
+              0.9,
+              0.72
+            ]
+          },
+          "camera": {
+            "position": [
+              -0.92,
+              0.96,
+              0.62
+            ],
+            "target": [
+              -1.85,
+              0.28,
+              -1.2
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "goal_garden",
+          "approachNode": "ANCHOR__kitchen__goal_garden_approach",
+          "targetNode": "TARGET__kitchen__goal_garden"
+        }
+      ],
+      "petScenarios": [
+        {
+          "id": "garden_water",
+          "requiredOwned": "garden",
+          "propNode": "PROP__kitchen__goal_garden",
+          "approachNode": "ANCHOR__kitchen__goal_garden_approach",
+          "targetNode": "TARGET__kitchen__goal_garden",
+          "targetFromApproach": true,
+          "faceProp": true,
+          "clips": [
+            "look"
+          ],
+          "audioCue": "waterRinse",
+          "propScalePulse": 1.025,
+          "camera": {
+            "position": [
+              0.78,
+              1.35,
+              0.22
+            ],
+            "target": [
+              -0.1,
+              0.82,
+              -2.25
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          }
+        }
+      ],
+      "interactives": [
+        {
+          "id": "wash_dishes",
+          "node": "ROOM__kitchen__static",
+          "hitNode": "HIT__kitchen__dish_sink",
+          "approachNode": "ANCHOR__kitchen__dish_approach",
+          "targetNode": "TARGET__kitchen__dish_sink",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              -0.15,
+              0.75,
+              -2.1
+            ],
+            "size": [
+              1.05,
+              1.1,
+              0.9
+            ]
+          },
+          "states": [
+            "dirty",
+            "clean"
+          ],
+          "initialState": "dirty"
+        },
+        {
+          "id": "lamp_main",
+          "node": "PROP__kitchen__pendant_lamp",
+          "hitNode": "HIT__kitchen__lamp_main",
+          "targetNode": "TARGET__kitchen__lamp_main",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              0.17,
+              2.42,
+              -0.2
+            ],
+            "size": [
+              1,
+              1.15,
+              1
+            ]
+          },
+          "states": [
+            "off",
+            "on"
+          ],
+          "initialState": "off"
+        }
+      ],
+      "doors": [
+        {
+          "id": "door_living",
+          "toRoom": "living",
+          "hitNode": "HIT__kitchen__door_living",
+          "approachNode": "ANCHOR__kitchen__door_living_approach",
+          "targetNode": "TARGET__kitchen__door_living",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              2.32,
+              1.18,
+              0
+            ],
+            "size": [
+              0.42,
+              2.45,
+              1.6
+            ]
+          }
+        }
+      ],
+      "navigation": {
+        "type": "conservative_aabb_zones",
+        "zones": [
+          {
+            "id": "front",
+            "min": [
+              -1.85,
+              0,
+              1.38
+            ],
+            "max": [
+              1.95,
+              0,
+              2.3
+            ]
+          },
+          {
+            "id": "door_lane",
+            "min": [
+              1.3,
+              0,
+              -0.5
+            ],
+            "max": [
+              2.22,
+              0,
+              1.65
+            ]
+          },
+          {
+            "id": "bowl_lane",
+            "min": [
+              -1.8,
+              0,
+              0.82
+            ],
+            "max": [
+              -0.45,
+              0,
+              1.92
+            ]
+          }
+        ]
+      },
+      "initialHiddenNodes": [
+        "PROP__kitchen__goal_garden"
+      ],
+      "metrics": {
+        "bytes": 25538152,
+        "sha256": "89285f3633089b8c02d67f3e03aeb4fb94f78589eed86671268249b09a5c27e6",
+        "triangles": 269441,
+        "primitives": 21,
+        "nodes": 24,
+        "meshes": 6,
+        "materials": 21,
+        "textures": 42,
+        "images": 42
+      },
+      "jobProps": [
+        {
+          "id": "dish_plate",
+          "jobId": "J01",
+          "file": "dish_plate.glb",
+          "placement": {
+            "position": [
+              -0.18,
+              0.571,
+              -2.1
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "kitchen_sponge",
+          "jobId": "J01",
+          "file": "kitchen_sponge.glb",
+          "placement": {
+            "position": [
+              -0.42,
+              0.7374482057236754,
+              -2.3
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.4
+          }
+        },
+        {
+          "id": "dish_rack",
+          "jobId": "J01",
+          "file": "dish_rack.glb",
+          "placement": {
+            "position": [
+              0.98,
+              0.6855584251826877,
+              -2.27
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "package_circle",
+          "jobId": "J04",
+          "file": "package_circle.glb",
+          "placement": {
+            "position": [
+              -1.33,
+              0,
+              -0.84
+            ],
+            "rotationDegrees": [
+              0,
+              -12,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "package_square",
+          "jobId": "J04",
+          "file": "package_square.glb",
+          "placement": {
+            "position": [
+              -1.63,
+              0,
+              -0.72
+            ],
+            "rotationDegrees": [
+              0,
+              8,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "package_star",
+          "jobId": "J04",
+          "file": "package_star.glb",
+          "placement": {
+            "position": [
+              -1.89,
+              0,
+              -0.82
+            ],
+            "rotationDegrees": [
+              0,
+              -6,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "package_triangle",
+          "jobId": "J04",
+          "file": "package_triangle.glb",
+          "placement": {
+            "position": [
+              -2.14,
+              0,
+              -0.72
+            ],
+            "rotationDegrees": [
+              0,
+              11,
+              0
+            ],
+            "scale": 1
+          }
+        },
+        {
+          "id": "bin_circle",
+          "jobId": "J04",
+          "file": "sorting_bin.glb",
+          "placement": {
+            "position": [
+              -2.06,
+              0,
+              -1.55
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "bin_square",
+          "jobId": "J04",
+          "file": "sorting_bin.glb",
+          "placement": {
+            "position": [
+              -1.57,
+              0,
+              -1.55
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "bin_star",
+          "jobId": "J04",
+          "file": "sorting_bin.glb",
+          "placement": {
+            "position": [
+              -1.08,
+              0,
+              -1.55
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "bin_triangle",
+          "jobId": "J04",
+          "file": "sorting_bin.glb",
+          "placement": {
+            "position": [
+              -0.59,
+              0,
+              -1.55
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        }
+      ],
+      "runtimeStaging": {
+        "nodeTransforms": [
+          {
+            "node": "PROP__kitchen__food_bowl",
+            "offset": [1.0, 0, 0],
+            "reason": "Keep the service food bowl visible beside the pet in portrait"
+          },
+          {
+            "node": "TARGET__kitchen__feed",
+            "offset": [1.0, 0, 0],
+            "reason": "Follow the moved service food bowl"
+          },
+          {
+            "node": "ANCHOR__kitchen__feed_approach",
+            "offset": [1.0, 0, 0],
+            "reason": "Follow the moved service food bowl"
+          },
+          {
+            "node": "PROP__kitchen__water_bowl",
+            "offset": [1.15, 0, 0],
+            "reason": "Keep the service water bowl visible on the other side of the pet"
+          },
+          {
+            "node": "TARGET__kitchen__water",
+            "offset": [1.15, 0, 0],
+            "reason": "Follow the moved service water bowl"
+          },
+          {
+            "node": "ANCHOR__kitchen__water_approach",
+            "offset": [1.15, 0, 0],
+            "reason": "Follow the moved service water bowl"
+          },
+          {
+            "node": "PROP__kitchen__pendant_lamp",
+            "offset": [
+              0,
+              0,
+              -0.7
+            ],
+            "reason": "lamp follows table"
+          },
+          {
+            "node": "HIT__kitchen__lamp_main",
+            "offset": [
+              0,
+              0,
+              -0.7
+            ],
+            "reason": "lamp follows table"
+          },
+          {
+            "node": "TARGET__kitchen__lamp_main",
+            "offset": [
+              0,
+              0,
+              -0.7
+            ],
+            "reason": "lamp follows table"
+          }
+        ],
+        "materialTransforms": [
+          {
+            "material": "Material_0.002",
+            "offset": [
+              0,
+              0,
+              -0.7
+            ],
+            "reason": "table clear of pet spawn and bowls, in front of counters"
+          }
+        ],
+        "materialStyles": [
+          {
+            "material": "REPAIR__kitchen_sink__towel",
+            "visible": false,
+            "reason": "Remove the flat white sink towel patch visible below the basin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bathroom",
+      "file": "bathroom.glb",
+      "rootNode": "ROOM__bathroom",
+      "staticNode": "ROOM__bathroom__static",
+      "bounds": {
+        "min": [
+          -2.1,
+          0,
+          -2.75
+        ],
+        "max": [
+          2.1,
+          3.2,
+          2.75
+        ]
+      },
+      "floor": {
+        "height": 0,
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "camera": {
+        "position": [
+          0.35,
+          0.86,
+          2.6
+        ],
+        "target": [
+          0.35,
+          0.24,
+          -1.4
+        ],
+        "landscapeTarget": [
+          0.85,
+          0.24,
+          -1.4
+        ],
+        "fovDegrees": 64,
+        "near": 0.05,
+        "far": 35,
+        "node": "CAMERA__bathroom__default"
+      },
+      "petSpawn": {
+        "node": "ANCHOR__bathroom__pet_spawn",
+        "position": [
+          0.35,
+          0,
+          1.5
+        ]
+      },
+      "actions": [
+        {
+          "id": "clean_water",
+          "approachNode": "ANCHOR__bathroom__clean_water_approach",
+          "targetNode": "TARGET__bathroom__clean_water",
+          "camera": {
+            "position": [
+              0.2,
+              1.45,
+              1.5
+            ],
+            "target": [
+              1.14,
+              0.4,
+              -1.3
+            ],
+            "fovDegrees": 62,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "clean_sand",
+          "approachNode": "ANCHOR__bathroom__clean_sand_approach",
+          "targetNode": "TARGET__bathroom__clean_sand",
+          "camera": {
+            "position": [
+              0.75,
+              0.7,
+              2.2
+            ],
+            "target": [
+              1.49,
+              0.18,
+              0.09
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          }
+        },
+        {
+          "id": "job_j03",
+          "approach": [
+            -0.05,
+            0,
+            -0.42
+          ],
+          "target": [
+            0.48,
+            0.72,
+            -1.78
+          ],
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              0.48,
+              0.72,
+              -1.78
+            ],
+            "size": [
+              0.68,
+              1.2,
+              0.58
+            ]
+          },
+          "camera": {
+            "position": [
+              0.72,
+              1.26,
+              0.02
+            ],
+            "target": [
+              0.48,
+              0.62,
+              -1.72
+            ],
+            "fovDegrees": 55,
+            "near": 0.05,
+            "far": 30
+          }
+        }
+      ],
+      "interactives": [
+        {
+          "id": "lamp_main",
+          "node": "FIXTURE__bathroom__pendant",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              0,
+              2.58,
+              -0.1
+            ],
+            "size": [
+              1,
+              0.65,
+              1
+            ]
+          },
+          "states": [
+            "off",
+            "on"
+          ],
+          "initialState": "on"
+        }
+      ],
+      "doors": [
+        {
+          "id": "door_living",
+          "toRoom": "living",
+          "hitNode": "HIT__bathroom__door_living",
+          "approachNode": "ANCHOR__bathroom__door_living_approach",
+          "targetNode": "TARGET__bathroom__door_living",
+          "hitShape": {
+            "type": "aabb",
+            "center": [
+              -2.02,
+              1.18,
+              0
+            ],
+            "size": [
+              0.42,
+              2.45,
+              1.6
+            ]
+          }
+        }
+      ],
+      "navigation": {
+        "type": "conservative_aabb_zones",
+        "zones": [
+          {
+            "id": "center",
+            "min": [
+              -0.45,
+              0,
+              -0.18
+            ],
+            "max": [
+              0.72,
+              0,
+              1.92
+            ]
+          },
+          {
+            "id": "door_lane",
+            "min": [
+              -1.92,
+              0,
+              -0.48
+            ],
+            "max": [
+              -0.35,
+              0,
+              0.55
+            ]
+          },
+          {
+            "id": "bath_lane",
+            "min": [
+              -1.3,
+              0,
+              -0.95
+            ],
+            "max": [
+              0.15,
+              0,
+              0.62
+            ]
+          },
+          {
+            "id": "sand_lane",
+            "min": [
+              -1.3,
+              0,
+              0.95
+            ],
+            "max": [
+              -0.18,
+              0,
+              2.12
+            ]
+          }
+        ]
+      },
+      "initialHiddenNodes": [],
+      "runtimeStaging": {
+        "nodeTransforms": [
+          {
+            "node": "TARGET__bathroom__clean_water",
+            "offset": [
+              1.79,
+              0,
+              -1.11
+            ],
+            "reason": "Wash target in the owner-placed bath (29.09 layout)"
+          },
+          {
+            "node": "ANCHOR__bathroom__clean_water_approach",
+            "offset": [
+              1.82,
+              0,
+              -0.95
+            ],
+            "reason": "Approach the front of the owner-placed bath"
+          },
+          {
+            "node": "TARGET__bathroom__clean_sand",
+            "offset": [
+              2.39,
+              0,
+              -1.58
+            ],
+            "reason": "Sand-bath target at owner-placed sand bath"
+          },
+          {
+            "node": "ANCHOR__bathroom__clean_sand_approach",
+            "offset": [
+              1.68,
+              0,
+              -0.42
+            ],
+            "reason": "Approach the owner-placed sand bath"
+          }
+        ],
+        "materialTransforms": []
+      },
+      "metrics": {
+        "bytes": 4915992,
+        "sha256": "c8dc3be6c991753225a69059bb3e62fa915308f3a6bf754872ecad69ac673082",
+        "triangles": 75942,
+        "nodes": 13,
+        "meshes": 3,
+        "primitives": 21,
+        "materials": 21,
+        "textures": 45,
+        "images": 45
+      },
+      "jobProps": [
+        {
+          "id": "slippers_pair",
+          "jobId": "SCENE",
+          "file": "slippers_pair.glb",
+          "placement": {
+            "position": [
+              -0.33,
+              0.08,
+              -0.4
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.247
+          }
+        },
+        {
+          "id": "towel_shelf",
+          "jobId": "J03",
+          "file": "towel_shelf.glb",
+          "placement": {
+            "position": [
+              0.48,
+              0,
+              -1.78
+            ],
+            "rotationDegrees": [
+              0,
+              0,
+              0
+            ],
+            "scale": 0.9
+          }
+        },
+        {
+          "id": "unfolded_towel_1",
+          "jobId": "J03",
+          "file": "towel_attempt8_416k.glb",
+          "placement": {
+            "position": [
+              0.16,
+              0,
+              -1.24
+            ],
+            "rotationDegrees": [
+              0,
+              8,
+              0
+            ],
+            "scale": 0.82
+          }
+        },
+        {
+          "id": "unfolded_towel_2",
+          "jobId": "J03",
+          "file": "towel_attempt8_416k.glb",
+          "placement": {
+            "position": [
+              0.42,
+              0,
+              -0.65
+            ],
+            "rotationDegrees": [
+              0,
+              -10,
+              0
+            ],
+            "scale": 0.82
+          }
+        }
+      ]
+    }
+  ],
+  "assets": {
+    "introBox": {
+      "file": "intro-box.glb",
+      "rootNode": "PROP__living__adoption_box",
+      "bodyNode": "PROP__living__adoption_box_body",
+      "lidNode": "PROP__living__adoption_lid",
+      "petSpawnNode": "ANCHOR__living__adoption_pet_spawn",
+      "pivot": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "floor_center"
+      },
+      "bounds": {
+        "min": [
+          -0.44167,
+          0,
+          -0.68218
+        ],
+        "max": [
+          0.44167,
+          0.94129,
+          0.675
+        ]
+      },
+      "authoredState": "open",
+      "closedStateSupported": true,
+      "source": "assets/production/static-pack-v1/box/gift-box-hollow-open.glb",
+      "metrics": {
+        "bytes": 317004,
+        "sha256": "2c58ec128b9b65089b112c4eeee1783868a6493babfef7de29ff8d836895eb35",
+        "triangles": 5264,
+        "nodes": 4,
+        "meshes": 2,
+        "primitives": 11,
+        "materials": 7,
+        "textures": 0,
+        "images": 0
+      }
+    }
+  }
+}
