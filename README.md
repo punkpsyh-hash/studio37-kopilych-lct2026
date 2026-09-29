@@ -9,7 +9,7 @@
 - [Пояснительная записка PDF](docs/submission-2026-09-29/kopilych-manual-2026-09-29.pdf).
 - [Изменения и границы проверки APK 0.5.3](docs/submission-2026-09-29/RELEASE-0.5.3.md).
 - [Архитектура и правила](docs/submission-2026-09-29/ARCHITECTURE.md).
-- [Презентация PDF](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pdf) и [PPTX](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pptx); слайды описывают предыдущий APK 0.5.2, обновление 0.5.3 указано выше.
+- [Презентация команды PPTX](docs/submission-2026-09-29/studio37-lct2026-team-presentation.pptx) для поля сдачи. [Техническая презентация PPTX](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pptx) и [PDF](docs/submission-2026-09-29/kopilych-presentation-2026-09-29.pdf) описывают предыдущий APK 0.5.2; обновление 0.5.3 указано выше.
 - [Комплект сдачи и матрица требований](docs/submission-2026-09-29/README.md), [аудит ТЗ для предыдущей сборки](docs/requirements-audit-2026-09-29.md), [маршрут быстрой проверки](docs/organizer-quick-check-2026-09-29.md).
 
 ## Исходники и локальный запуск
